@@ -22,4 +22,8 @@ public class Garage {
   public Integer getPrice(CarDetail detail){
     return stock.get(detail);
   }
+
+  public void showStock(){
+    //to be implemented
+  }
 }
