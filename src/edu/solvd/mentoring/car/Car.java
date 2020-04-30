@@ -7,7 +7,7 @@ import edu.solvd.mentoring.car.detail.Wheel;
 import java.util.HashMap;
 
 public class Car {
-    Engine engine;
+  Engine engine;
   Wheel wheel;
   CarBase carBase;
 
@@ -15,10 +15,10 @@ public class Car {
   short boost;
   HashMap<Short,Short> clutch;
 
-  public Car(Engine eng, Wheel wh, CarBase cb){
-    this.engine = eng;
-    this.wheel = wh;
-    this.carBase = cb;
+  public Car(Engine engine, Wheel wheel, CarBase base){
+    this.engine = engine;
+    this.wheel = wheel;
+    this.carBase = base;
     calculateCharacteristicks();
   }
 

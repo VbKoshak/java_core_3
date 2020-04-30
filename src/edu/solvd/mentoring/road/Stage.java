@@ -9,7 +9,7 @@ public class Stage {
   private Surface surface;
   private double stageDistance;
 
-  public Stage(Vector start, String stageNamem, Surface surface){
+  public Stage(Vector start, String stageName, Surface surface){
     this.stageName = stageName;
     this.surface = surface;
     vectors.add(start);

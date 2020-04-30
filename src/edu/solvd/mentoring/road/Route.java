@@ -8,11 +8,24 @@ public class Route {
   private ArrayList<Character> points = new ArrayList<>();
 
   public Route(Stage firstStage) {
-    this.totalDistance = firstStage.getStageDistance();
     this.stages.add(firstStage);
+    this.totalDistance = firstStage.getStageDistance();
   }
 
   public double getTotalDistance() {
     return totalDistance;
+  }
+
+  public void addStage(Stage stage){
+    this.stages.add(stage);
+    this.totalDistance += stage.getStageDistance();
+  }
+
+  private void putPoints(){
+    // to be implemented ...
+  }
+
+  public void getPoints(){
+    // to be implemented ...
   }
 }

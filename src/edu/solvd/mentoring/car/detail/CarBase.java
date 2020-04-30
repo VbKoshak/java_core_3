@@ -9,7 +9,7 @@ public class CarBase extends CarDetail {
   short basicBoost;
   HashMap<Short,Short> basicClutch = new HashMap<>();
 
-  public CarBase(DetailQuality quality, String name, short basicMaxSpeed, short BasicBoost, HashMap<Short,Short> basicClutch) {
+  public CarBase(DetailQuality quality, String name, short basicMaxSpeed, short basicBoost, HashMap<Short,Short> basicClutch) {
     super(quality, name);
     this.basicBoost = basicBoost;
     this.basicClutch = basicClutch;
