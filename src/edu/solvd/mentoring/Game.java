@@ -18,8 +18,15 @@ public class Game {
     Support starterPack = new Support();
     Route rt = starterPack.getRoute((int)(Math.round(Math.random()*2+1)));
     Car[] enemies = {starterPack.getCar(2),starterPack.getCar(4)};
-    this.currentRace = new Race(rt,enemies,100);
+    this.currentRace = new Race(rt,enemies,100,this.player.getCar());
     this.currentRace.getRoute().showRoute();
-
+    boolean winner = this.currentRace.start();
+    if(winner == true){
+      System.out.println("You win!!!");
+      this.player.winMoney(this.currentRace.getPrize());
+    } else {
+      System.out.println("You lose");
+      this.player.winMoney(5); // just to mood player up
+    }
   }
 }

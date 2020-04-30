@@ -38,7 +38,7 @@ public class Player {
     }
   }
 
-  public boolean getMoney(int value){
+  public boolean winMoney(int value){
     if (value > 0 && (this.money + value > this.money)){
       this.money += value;
       return true;

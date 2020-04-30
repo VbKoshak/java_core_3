@@ -69,4 +69,8 @@ public class Car {
   public HashMap<Short, Short> getClutch() {
     return clutch;
   }
+
+  public short getClutchBySurfaceId(Short id){
+    return this.clutch.get(id);
+  }
 }
