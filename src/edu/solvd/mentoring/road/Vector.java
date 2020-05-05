@@ -12,7 +12,7 @@ public class Vector {
   }
 
   private void countDistance() {
-    this.distance = Math.sqrt(Math.pow(this.a.getX(),2) + Math.pow(this.b.getX(),2));
+    this.distance = Math.sqrt(Math.pow(this.a.getX() - this.b.getX(),2) + Math.pow(this.a.getY() - this.b.getY(),2));
   }
 
   public double getDistance() {
