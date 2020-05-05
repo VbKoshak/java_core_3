@@ -7,9 +7,9 @@ import java.util.HashMap;
 public class CarBase extends CarDetail {
   short basicMaxSpeed;
   short basicBoost;
-  HashMap<Short,Short> basicClutch = new HashMap<>();
+  HashMap<Integer,Short> basicClutch = new HashMap<>();
 
-  public CarBase(DetailQuality quality, String name, short basicMaxSpeed, short basicBoost, HashMap<Short,Short> basicClutch) {
+  public CarBase(DetailQuality quality, String name, short basicMaxSpeed, short basicBoost, HashMap<Integer,Short> basicClutch) {
     super(quality, name);
     this.basicBoost = basicBoost;
     this.basicClutch = basicClutch;
@@ -24,7 +24,7 @@ public class CarBase extends CarDetail {
     return basicBoost;
   }
 
-  public HashMap<Short,Short> getBasicClutch() {
+  public HashMap<Integer,Short> getBasicClutch() {
     return basicClutch;
   }
 }

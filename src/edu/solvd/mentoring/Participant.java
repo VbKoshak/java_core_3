@@ -13,7 +13,7 @@ public class Participant {
   private double[] progressLeft;
   private double[] progress;
   private ArrayList<HashMap<Double,Double>> veerMarks;
-  private Short[] surfacesId;
+  private Integer[] surfacesId;
   private int currentStage = 0;
   private double kmGone = 0;
   private char sym;
@@ -25,7 +25,7 @@ public class Participant {
     int length = route.getLength();
     this.progressLeft = new double[length];
     this.progress = new double[length];
-    this.surfacesId = new Short[length];
+    this.surfacesId = new Integer[length];
     this.veerMarks = new ArrayList<>();
     for (int i = 0; i < length; i++){
       this.progressLeft[i] = route.getStage(i).getStageDistance();
@@ -40,7 +40,7 @@ public class Participant {
     }
   }
 
-  private double getSurfaceMovement(double movementPoints, Short surfaceId){
+  private double getSurfaceMovement(double movementPoints, Integer surfaceId){
     return movementPoints * this.car.getClutchBySurfaceId(surfaceId) / 10;
   }
 

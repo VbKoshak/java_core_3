@@ -5,14 +5,14 @@ import edu.solvd.mentoring.enums.DetailQuality;
 import java.util.HashMap;
 
 public class Wheel extends CarDetail {
-  private HashMap<Short, Short> clutch = new HashMap<>();
+  private HashMap<Integer, Short> clutch = new HashMap<>();
 
-  public Wheel(DetailQuality quality, String name, HashMap<Short,Short> clutch){
+  public Wheel(DetailQuality quality, String name, HashMap<Integer,Short> clutch){
     super(quality,name);
     this.clutch = clutch;
   }
 
-  public HashMap<Short, Short> getClutch() {
+  public HashMap<Integer, Short> getClutch() {
     return clutch;
   }
 }

@@ -9,6 +9,11 @@ public class Point {
     this.y = y;
   }
 
+  public Point(Point pt){
+    this.x = pt.getX();
+    this.y = pt.getY();
+  }
+
   public int getX() {
     return x;
   }

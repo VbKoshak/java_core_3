@@ -1,11 +1,11 @@
-package edu.solvd.mentoring.road;
+package edu.solvd.mentoring.road.surface;
 
 public class Surface {
   private String name;
   private char sym;
-  private short surfaceId;
+  private int surfaceId;
 
-  public Surface(String name, char sym, short surfaceid) {
+  public Surface(String name, char sym, int surfaceid) {
     this.name = name;
     this.sym = sym;
     this.surfaceId = surfaceid;
@@ -19,7 +19,7 @@ public class Surface {
     return sym;
   }
 
-  public short getSurfaceId() {
+  public int getSurfaceId() {
     return surfaceId;
   }
 }

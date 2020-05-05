@@ -6,9 +6,12 @@ import edu.solvd.mentoring.car.detail.Engine;
 import edu.solvd.mentoring.car.detail.Wheel;
 import edu.solvd.mentoring.enums.DetailQuality;
 import edu.solvd.mentoring.road.*;
-import edu.solvd.mentoring.road.Surface;
+import edu.solvd.mentoring.road.surface.Surface;
 
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Random;
+import java.util.Set;
 
 class Support {
   // make it random so for every new Support() different values are generated
@@ -24,7 +27,7 @@ class Support {
   //1 garage
   private static HashMap<Integer, Surface> surfaces = new HashMap<>();
 
-  private static HashMap<Integer,Wheel> wheels = new HashMap<>();
+  private static HashMap<Integer, Wheel> wheels = new HashMap<>();
   private static HashMap<Integer, Engine> engines = new HashMap<>();
   private static HashMap<Integer, CarBase> carBases = new HashMap<>();
 
@@ -36,12 +39,29 @@ class Support {
   private static short s(int i){
     return (short)i;
   }
+  private static short s(double d){ return (short)d; }
+
+  //some additional Functions
+  private static short getShort(short maxValue, short minValue){
+    return (short)(Math.round(Math.random() * (maxValue - minValue)) + minValue);
+  }
+  private static HashMap<Integer,Short> getGeneratedClutch(short maxClutch, short minClutch, HashMap<Integer,Surface> surfaces){
+    HashMap<Integer,Short> clutch = new HashMap<>();
+    Set<Integer> surfaceKeys = surfaces.keySet();
+
+    for(Integer i: surfaceKeys){
+      short val = s(getShort(maxClutch,minClutch));
+      clutch.put(i,val);
+    }
+
+    return clutch;
+  }
 
   private static void initSurfaces(){
-      surfaces.put(1,new Surface("highway",'=',(short)1));
-      surfaces.put(2,new Surface("city road",'-',(short)2));
-      surfaces.put(3,new Surface("ferry road",'+',(short)3));
-      surfaces.put(4,new Surface("country road",'*',(short)4));
+      surfaces.put(1,new Surface("highway",'=',1));
+      surfaces.put(2,new Surface("city road",'-',2));
+      surfaces.put(3,new Surface("ferry road",'+',3));
+      surfaces.put(4,new Surface("country road",'*',4));
   }
 
   public static Surface getSurface(int id){
@@ -51,46 +71,53 @@ class Support {
     return surfaces.get(id);
   }
 
+  public static HashMap<Integer, Surface> getSurfaces(){
+    if (surfaces.isEmpty()){
+      initSurfaces();
+    }
+    return surfaces;
+  }
+
   private static void initWheels(){
-      HashMap<Short,Short> wheelClutch1 = new HashMap<>();
-      HashMap<Short,Short> wheelClutch2 = new HashMap<>();
-      HashMap<Short,Short> wheelClutch3 = new HashMap<>();
-      HashMap<Short,Short> wheelClutch4 = new HashMap<>();
-      HashMap<Short,Short> wheelClutch5 = new HashMap<>();
+      HashMap<Integer,Short> wheelClutch1 = new HashMap<>();
+      HashMap<Integer,Short> wheelClutch2 = new HashMap<>();
+      HashMap<Integer,Short> wheelClutch3 = new HashMap<>();
+      HashMap<Integer,Short> wheelClutch4 = new HashMap<>();
+      HashMap<Integer,Short> wheelClutch5 = new HashMap<>();
 
-      //Surface id, clutch [1-7]
-      wheelClutch1.put(s(1),s(2));
-      wheelClutch1.put(s(2),s(2));
-      wheelClutch1.put(s(3),s(2));
-      wheelClutch1.put(s(4),s(2));
+      //Surface id, clutch [0-7]
+      wheelClutch1.put(1,s(2));
+      wheelClutch1.put(2,s(2));
+      wheelClutch1.put(3,s(2));
+      wheelClutch1.put(4,s(2));
 
-      wheelClutch2.put(s(1),s(5));
-      wheelClutch2.put(s(2),s(1));
-      wheelClutch2.put(s(3),s(2));
-      wheelClutch2.put(s(4),s(1));
+      wheelClutch2.put(1,s(5));
+      wheelClutch2.put(2,s(1));
+      wheelClutch2.put(3,s(2));
+      wheelClutch2.put(4,s(1));
 
-      wheelClutch3.put(s(1),s(1));
-      wheelClutch3.put(s(2),s(1));
-      wheelClutch3.put(s(3),s(3));
-      wheelClutch3.put(s(4),s(4));
+      wheelClutch3.put(1,s(1));
+      wheelClutch3.put(2,s(1));
+      wheelClutch3.put(3,s(3));
+      wheelClutch3.put(4,s(4));
 
-      wheelClutch4.put(s(1),s(1));
-      wheelClutch4.put(s(2),s(1));
-      wheelClutch4.put(s(3),s(7));
-      wheelClutch4.put(s(4),s(7));
+      wheelClutch4.put(1,s(1));
+      wheelClutch4.put(2,s(1));
+      wheelClutch4.put(3,s(7));
+      wheelClutch4.put(4,s(7));
 
-      wheelClutch5.put(s(1),s(4));
-      wheelClutch5.put(s(2),s(6));
-      wheelClutch5.put(s(3),s(5));
-      wheelClutch5.put(s(4),s(3));
+      wheelClutch5.put(1,s(4));
+      wheelClutch5.put(2,s(6));
+      wheelClutch5.put(3,s(5));
+      wheelClutch5.put(4,s(3));
 
 
 
       wheels.put(1,new Wheel(DetailQuality.C,"Basic",wheelClutch1));
-      wheels.put(2,new Wheel(DetailQuality.B,"Sport",wheelClutch1));
-      wheels.put(3,new Wheel(DetailQuality.B,"OffRoad",wheelClutch1));
-      wheels.put(4,new Wheel(DetailQuality.A,"OffRoad II",wheelClutch1));
-      wheels.put(5,new Wheel(DetailQuality.S,"Universal LU",wheelClutch1));
+      wheels.put(2,new Wheel(DetailQuality.B,"Sport",wheelClutch2));
+      wheels.put(3,new Wheel(DetailQuality.B,"OffRoad",wheelClutch3));
+      wheels.put(4,new Wheel(DetailQuality.A,"OffRoad II",wheelClutch4));
+      wheels.put(5,new Wheel(DetailQuality.S,"Universal LU",wheelClutch5));
   }
 
   public static Wheel getWheel(int id){
@@ -98,6 +125,41 @@ class Support {
       initWheels();
     }
     return wheels.get(id);
+  }
+
+  public static Wheel getGeneratedWheel(HashMap<Integer,Surface> surfaces){
+    HashMap<Integer,Short> clutch = getGeneratedClutch(s(7),s(0),surfaces);
+    int avg = 0;
+    for (short val: clutch.values()){
+      avg += val;
+    }
+    avg = Math.round(avg/clutch.size());
+    DetailQuality dq;
+    switch (avg) {
+      case 1:
+      case 2:
+        dq = DetailQuality.C;
+        break;
+      case 3:
+      case 4:
+        dq = DetailQuality.B;
+        break;
+      case 5:
+      case 6:
+        dq = DetailQuality.A;
+        break;
+      case 7:
+        dq = DetailQuality.S;
+        break;
+      case 0:
+        default:
+          dq = DetailQuality.C;
+          break;
+    }
+
+    final String defaultName = "someBasicWheel";
+    return new Wheel(dq,defaultName,clutch);
+
   }
 
   private static void initEngines(){
@@ -117,26 +179,56 @@ class Support {
     return engines.get(id);
   }
 
+  public static Engine getGeneratedEngine(){
+    final String defaultName = "someBasicEngine";
+    short speed = getShort(s(7),s(0));
+    short boost = getShort(s(7),s(0));
+    DetailQuality dq;
+    int avg = Math.round(speed + boost);
+    switch (avg) {
+      case 1:
+      case 2:
+        dq = DetailQuality.C;
+        break;
+      case 3:
+      case 4:
+        dq = DetailQuality.B;
+        break;
+      case 5:
+      case 6:
+        dq = DetailQuality.A;
+        break;
+      case 7:
+        dq = DetailQuality.S;
+        break;
+      case 0:
+      default:
+        dq = DetailQuality.C;
+        break;
+    }
+    return new Engine(dq,defaultName,speed,boost);
+  }
+
   private static void initCarBases(){
-      HashMap<Short,Short> baseClutch1 = new HashMap<>();
-      HashMap<Short,Short> baseClutch2 = new HashMap<>();
-      HashMap<Short,Short> baseClutch3 = new HashMap<>();
+      HashMap<Integer,Short> baseClutch1 = new HashMap<>();
+      HashMap<Integer,Short> baseClutch2 = new HashMap<>();
+      HashMap<Integer,Short> baseClutch3 = new HashMap<>();
 
       //Surface id, clutch [1-3]
-      baseClutch1.put(s(1),s(1));
-      baseClutch1.put(s(2),s(1));
-      baseClutch1.put(s(3),s(1));
-      baseClutch1.put(s(4),s(1));
+      baseClutch1.put(1,s(1));
+      baseClutch1.put(2,s(1));
+      baseClutch1.put(3,s(1));
+      baseClutch1.put(4,s(1));
 
-      baseClutch2.put(s(1),s(1));
-      baseClutch2.put(s(2),s(1));
-      baseClutch2.put(s(3),s(2));
-      baseClutch2.put(s(4),s(3));
+      baseClutch2.put(1,s(1));
+      baseClutch2.put(2,s(1));
+      baseClutch2.put(3,s(2));
+      baseClutch2.put(4,s(3));
 
-      baseClutch3.put(s(1),s(3));
-      baseClutch3.put(s(2),s(2));
-      baseClutch3.put(s(3),s(1));
-      baseClutch3.put(s(4),s(1));
+      baseClutch3.put(1,s(3));
+      baseClutch3.put(2,s(2));
+      baseClutch3.put(3,s(1));
+      baseClutch3.put(4,s(1));
 
       //maxSpeed 1-3
       //boost 1-3
@@ -153,6 +245,14 @@ class Support {
     return carBases.get(id);
   }
 
+  public static CarBase getGeneratedCarBase(HashMap<Integer,Surface> surfaces){
+    HashMap<Integer,Short> clutch = getGeneratedClutch(s(3),s(1),surfaces);
+    short speed = getShort(s(3),s(1));
+    short boost = getShort(s(3),s(1));
+    final String defaultName = "someBasicCarBase";
+    return new CarBase(DetailQuality.B,defaultName,speed,boost,clutch);
+  }
+
   private static void initCars(){
       cars.put(1, new Car(getEngine(1), getWheel(1), getCarBase(1)));
       cars.put(2, new Car(getEngine(3), getWheel(2), getCarBase(2)));
@@ -166,6 +266,10 @@ class Support {
       initCars();
     }
     return cars.get(id);
+  }
+
+  public static Car getGeneratedCar(HashMap<Integer,Surface> surfaces){
+    return new Car(getGeneratedEngine(),getGeneratedWheel(surfaces),getGeneratedCarBase(surfaces));
   }
 
   private static void initRoutes(){
@@ -248,6 +352,48 @@ class Support {
       initRoutes();
     }
     return routes.get(id);
+  }
+
+  private static Stage generateStage(int vectorCount, Surface surf, Point startWith){
+    final String DEFAULT_NAME = "someDefName";
+    final short MAX_INCREASE = 5;
+    Point beginPoint = new Point(startWith);
+    Point endPoint = new Point(getShort(s(beginPoint.getX() + MAX_INCREASE), s(beginPoint.getX())),getShort(s(beginPoint.getY() + MAX_INCREASE), s(beginPoint.getY())));
+    Stage st = new Stage(new Vector(new Point(beginPoint),new Point(endPoint)),DEFAULT_NAME,surf);
+
+    for(int i = 0; i < vectorCount; i++){
+      beginPoint = endPoint;
+      endPoint = new Point(getShort(s(beginPoint.getX() + MAX_INCREASE), s(beginPoint.getX())),getShort(s(beginPoint.getY() + MAX_INCREASE), s(beginPoint.getY())));
+      st.addVector(new Vector(new Point(beginPoint), new Point(endPoint)));
+    }
+
+    return st;
+  }
+
+  private static Surface getRandomSurface(HashMap<Integer, Surface> surfaces){
+    Set<Integer> surfaceKeys = surfaces.keySet();
+    Random rand = new Random();
+
+    int index = rand.nextInt(surfaceKeys.size());
+    Iterator<Integer> iter = surfaceKeys.iterator();
+    for (int i = 0; i < index; i++) {
+      iter.next();
+    }
+    return surfaces.get(iter.next());
+  }
+
+  public static Route getGeneratedRoute(int stagesCount, HashMap<Integer,Surface> surfaces) {
+    final int DEFAULT_VECTOR_COUNT = 3;
+    Stage st = generateStage(DEFAULT_VECTOR_COUNT,getRandomSurface(surfaces),new Point(0,0));
+    Point lastPoint = st.getLastPoint();
+    Route r = new Route(st);
+    stagesCount--;
+    for (int i = 0; i < stagesCount; i++){
+      Stage stage = generateStage(DEFAULT_VECTOR_COUNT,getRandomSurface(surfaces),lastPoint);
+      lastPoint = stage.getLastPoint();
+      r.addStage(stage);
+    }
+    return r;
   }
 
   private static void initGarage(){

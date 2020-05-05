@@ -15,7 +15,7 @@ public class Garage {
     stock.put(detail,price);
   }
 
-  public void buyCaretail(CarDetail detail){
+  public void buyCarDetail(CarDetail detail){
     stock.remove(detail);
   }
 

@@ -13,7 +13,7 @@ public class Car {
 
   short maxSpeed;
   short boost;
-  HashMap<Short,Short> clutch;
+  HashMap<Integer,Short> clutch;
 
   public Car(Engine engine, Wheel wheel, CarBase base){
     this.engine = engine;
@@ -66,11 +66,11 @@ public class Car {
     return boost;
   }
 
-  public HashMap<Short, Short> getClutch() {
+  public HashMap<Integer, Short> getClutch() {
     return clutch;
   }
 
-  public short getClutchBySurfaceId(Short id){
+  public short getClutchBySurfaceId(Integer id){
     return this.clutch.get(id);
   }
 }

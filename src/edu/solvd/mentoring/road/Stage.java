@@ -3,7 +3,7 @@ package edu.solvd.mentoring.road;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import edu.solvd.mentoring.road.Surface;
+import edu.solvd.mentoring.road.surface.Surface;
 
 public class Stage {
   private String stageName;
@@ -18,6 +18,8 @@ public class Stage {
     vectors.add(start);
     this.stageDistance = start.getDistance();
   }
+
+
 
   public void addVector(Vector c){
     angles.put(this.stageDistance,calcAngle(vectors.get(vectors.size()-1),c));
@@ -51,5 +53,9 @@ public class Stage {
 
   public HashMap<Double,Double> getAngles(){
     return this.angles;
+  }
+
+  public Point getLastPoint() {
+    return this.vectors.get(this.vectors.size() - 1).getB();
   }
 }
