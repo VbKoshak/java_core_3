@@ -2,7 +2,6 @@ package edu.solvd.mentoring;
 
 import edu.solvd.mentoring.car.Car;
 import edu.solvd.mentoring.car.detail.CarBase;
-import edu.solvd.mentoring.car.detail.CarDetail;
 import edu.solvd.mentoring.car.detail.Engine;
 import edu.solvd.mentoring.car.detail.Wheel;
 import edu.solvd.mentoring.enums.DetailQuality;
@@ -11,7 +10,7 @@ import edu.solvd.mentoring.road.Surface;
 
 import java.util.HashMap;
 
-public class Support {
+class Support {
   // make it random so for every new Support() different values are generated
   //
   //4 surfaces
@@ -23,43 +22,36 @@ public class Support {
   //5 cars
   //3 routes
   //1 garage
-  private HashMap<Integer, Surface> surfaces = new HashMap<>();
+  private static HashMap<Integer, Surface> surfaces = new HashMap<>();
 
-  private HashMap<Integer,Wheel> wheels = new HashMap<>();
-  private HashMap<Integer, Engine> engines = new HashMap<>();
-  private HashMap<Integer, CarBase> carBases = new HashMap<>();
+  private static HashMap<Integer,Wheel> wheels = new HashMap<>();
+  private static HashMap<Integer, Engine> engines = new HashMap<>();
+  private static HashMap<Integer, CarBase> carBases = new HashMap<>();
 
-  private HashMap<Integer, Car> cars = new HashMap<>();
-  private HashMap<Integer, Route> routes = new HashMap<>();
-  private Garage garage = new Garage();
-
-  public Support(){
-    initSurfaces();
-    initWheels();
-    initEngines();
-    initCarBases();
-    initCars();
-    initRoutes();
-    initGarage();
-  }
+  private static HashMap<Integer, Car> cars = new HashMap<>();
+  private static HashMap<Integer, Route> routes = new HashMap<>();
+  private static Garage garage = null;
 
   //just a quick converter
-  private short s(int i){
+  private static short s(int i){
     return (short)i;
   }
 
-  private void initSurfaces(){
-      this.surfaces.put(1,new Surface("highway",'=',(short)1));
-      this.surfaces.put(2,new Surface("city road",'-',(short)2));
-      this.surfaces.put(3,new Surface("ferry road",'+',(short)3));
-      this.surfaces.put(4,new Surface("country road",'*',(short)4));
+  private static void initSurfaces(){
+      surfaces.put(1,new Surface("highway",'=',(short)1));
+      surfaces.put(2,new Surface("city road",'-',(short)2));
+      surfaces.put(3,new Surface("ferry road",'+',(short)3));
+      surfaces.put(4,new Surface("country road",'*',(short)4));
   }
 
-  public Surface getSurface(int id){
-    return this.surfaces.get(id);
+  public static Surface getSurface(int id){
+    if (surfaces.isEmpty()){
+      initSurfaces();
+    }
+    return surfaces.get(id);
   }
 
-  private void initWheels(){
+  private static void initWheels(){
       HashMap<Short,Short> wheelClutch1 = new HashMap<>();
       HashMap<Short,Short> wheelClutch2 = new HashMap<>();
       HashMap<Short,Short> wheelClutch3 = new HashMap<>();
@@ -94,32 +86,38 @@ public class Support {
 
 
 
-      this.wheels.put(1,new Wheel(DetailQuality.C,"Basic",wheelClutch1));
-      this.wheels.put(2,new Wheel(DetailQuality.B,"Sport",wheelClutch1));
-      this.wheels.put(3,new Wheel(DetailQuality.B,"OffRoad",wheelClutch1));
-      this.wheels.put(4,new Wheel(DetailQuality.A,"OffRoad II",wheelClutch1));
-      this.wheels.put(5,new Wheel(DetailQuality.S,"Universal LU",wheelClutch1));
+      wheels.put(1,new Wheel(DetailQuality.C,"Basic",wheelClutch1));
+      wheels.put(2,new Wheel(DetailQuality.B,"Sport",wheelClutch1));
+      wheels.put(3,new Wheel(DetailQuality.B,"OffRoad",wheelClutch1));
+      wheels.put(4,new Wheel(DetailQuality.A,"OffRoad II",wheelClutch1));
+      wheels.put(5,new Wheel(DetailQuality.S,"Universal LU",wheelClutch1));
   }
 
-  public Wheel getWheel(int id){
-    return this.wheels.get(id);
+  public static Wheel getWheel(int id){
+    if(wheels.isEmpty() == true){
+      initWheels();
+    }
+    return wheels.get(id);
   }
 
-  private void initEngines(){
+  private static void initEngines(){
       //maxSpeed 0-7
       //boost 0-7
-      this.engines.put(1, new Engine(DetailQuality.C, "Horse 1v", s(1), s(1)));
-      this.engines.put(2, new Engine(DetailQuality.B, "Just fine", s(5), s(2)));
-      this.engines.put(3, new Engine(DetailQuality.B, "Rabbit power", s(2), s(5)));
-      this.engines.put(4, new Engine(DetailQuality.A, "HAUDI corp.", s(4), s(4)));
-      this.engines.put(5, new Engine(DetailQuality.S, "TERRARI v20", s(6), s(7)));
+      engines.put(1, new Engine(DetailQuality.C, "Horse 1v", s(1), s(1)));
+      engines.put(2, new Engine(DetailQuality.B, "Just fine", s(5), s(2)));
+      engines.put(3, new Engine(DetailQuality.B, "Rabbit power", s(2), s(5)));
+      engines.put(4, new Engine(DetailQuality.A, "HAUDI corp.", s(4), s(4)));
+      engines.put(5, new Engine(DetailQuality.S, "TERRARI v20", s(6), s(7)));
   }
 
-  public Engine getEngine(int id){
-    return this.engines.get(id);
+  public static Engine getEngine(int id){
+    if(engines.isEmpty()){
+      initEngines();
+    }
+    return engines.get(id);
   }
 
-  private void initCarBases(){
+  private static void initCarBases(){
       HashMap<Short,Short> baseClutch1 = new HashMap<>();
       HashMap<Short,Short> baseClutch2 = new HashMap<>();
       HashMap<Short,Short> baseClutch3 = new HashMap<>();
@@ -142,29 +140,35 @@ public class Support {
 
       //maxSpeed 1-3
       //boost 1-3
-      this.carBases.put(1,new CarBase(DetailQuality.C,"Basic",s(1),s(1),baseClutch1));
-      this.carBases.put(2,new CarBase(DetailQuality.B,"Truck",s(1),s(2),baseClutch2));
-      this.carBases.put(3,new CarBase(DetailQuality.B,"Sport",s(2),s(1),baseClutch3));
+      carBases.put(1,new CarBase(DetailQuality.C,"Basic",s(1),s(1),baseClutch1));
+      carBases.put(2,new CarBase(DetailQuality.B,"Truck",s(1),s(2),baseClutch2));
+      carBases.put(3,new CarBase(DetailQuality.B,"Sport",s(2),s(1),baseClutch3));
 
   }
 
-  public CarBase getCarBase(int id){
-    return this.carBases.get(id);
+  public static CarBase getCarBase(int id){
+    if(carBases.isEmpty()){
+      initCarBases();
+    }
+    return carBases.get(id);
   }
 
-  private void initCars(){
-      this.cars.put(1, new Car(this.getEngine(1), this.getWheel(1), this.getCarBase(1)));
-      this.cars.put(2, new Car(this.getEngine(3), this.getWheel(2), this.getCarBase(2)));
-      this.cars.put(3, new Car(this.getEngine(4), this.getWheel(3), this.getCarBase(2)));
-      this.cars.put(4, new Car(this.getEngine(4), this.getWheel(1), this.getCarBase(3)));
-      this.cars.put(5, new Car(this.getEngine(3), this.getWheel(4), this.getCarBase(1)));
+  private static void initCars(){
+      cars.put(1, new Car(getEngine(1), getWheel(1), getCarBase(1)));
+      cars.put(2, new Car(getEngine(3), getWheel(2), getCarBase(2)));
+      cars.put(3, new Car(getEngine(4), getWheel(3), getCarBase(2)));
+      cars.put(4, new Car(getEngine(4), getWheel(1), getCarBase(3)));
+      cars.put(5, new Car(getEngine(3), getWheel(4), getCarBase(1)));
   }
 
-  public Car getCar(int id){
-    return this.cars.get(id);
+  public static Car getCar(int id){
+    if(cars.isEmpty()){
+      initCars();
+    }
+    return cars.get(id);
   }
 
-  private void initRoutes(){
+  private static void initRoutes(){
       Vector v1 = new Vector(new Point(1, 1), new Point(2, 4));
       Vector v2 = new Vector(new Point(2, 4), new Point(5, 2));
       Vector v3 = new Vector(new Point(5, 2), new Point(6, 6));
@@ -193,30 +197,30 @@ public class Support {
       Vector v28 = new Vector(new Point(30, 50), new Point(35, 51));
 
 
-      Stage stage1 = new Stage(v1, "Beginner", this.getSurface(1));
+      Stage stage1 = new Stage(v1, "Beginner", getSurface(1));
       stage1.addVector(v2);
       stage1.addVector(v3);
-      Stage stage2 = new Stage(v4, "Cross", this.getSurface(3));
+      Stage stage2 = new Stage(v4, "Cross", getSurface(3));
       stage2.addVector(v5);
       stage2.addVector(v6);
-      Stage stage3 = new Stage(v7, "Devil Hill", this.getSurface(2));
+      Stage stage3 = new Stage(v7, "Devil Hill", getSurface(2));
       stage3.addVector(v8);
 
-      Stage stage11 = new Stage(v11, "Crocodile", this.getSurface(4));
+      Stage stage11 = new Stage(v11, "Crocodile", getSurface(4));
       stage11.addVector(v12);
       stage11.addVector(v13);
-      Stage stage12 = new Stage(v14, "Picnic", this.getSurface(3));
+      Stage stage12 = new Stage(v14, "Picnic", getSurface(3));
       stage12.addVector(v15);
       stage12.addVector(v16);
-      Stage stage13 = new Stage(v17, "Beauties nose", this.getSurface(1));
+      Stage stage13 = new Stage(v17, "Beauties nose", getSurface(1));
       stage13.addVector(v18);
 
-      Stage stage21 = new Stage(v21, "Loop field", this.getSurface(2));
+      Stage stage21 = new Stage(v21, "Loop field", getSurface(2));
       stage21.addVector(v22);
       stage21.addVector(v23);
-      Stage stage22 = new Stage(v24, "Class rocks", this.getSurface(4));
+      Stage stage22 = new Stage(v24, "Class rocks", getSurface(4));
       stage22.addVector(v25);
-      Stage stage23 = new Stage(v26, "Thread hell", this.getSurface(1));
+      Stage stage23 = new Stage(v26, "Thread hell", getSurface(1));
       stage23.addVector(v27);
       stage23.addVector(v28);
 
@@ -234,26 +238,34 @@ public class Support {
       r3.addStage(stage23);
 
 
-      this.routes.put(1, r1);
-      this.routes.put(2, r2);
-      this.routes.put(3, r3);
+      routes.put(1, r1);
+      routes.put(2, r2);
+      routes.put(3, r3);
   }
 
-  public Route getRoute(int id){return this.routes.get(id);}
-
-  private void initGarage(){
-    this.garage.addCarDetail(this.getCarBase(2),400);
-    this.garage.addCarDetail(this.getCarBase(3),400);
-    this.garage.addCarDetail(this.getEngine(3),250);
-    this.garage.addCarDetail(this.getEngine(3),350);
-    this.garage.addCarDetail(this.getEngine(4),500);
-    this.garage.addCarDetail(this.getWheel(3),200);
-    this.garage.addCarDetail(this.getWheel(6),450);
-    this.garage.addCarDetail(this.getEngine(3),250);
-    this.garage.addCarDetail(this.getEngine(5),750);
+  public static Route getRoute(int id){
+    if(routes.isEmpty()){
+      initRoutes();
+    }
+    return routes.get(id);
   }
 
-  public Garage getGarage(){
-    return this.garage;
+  private static void initGarage(){
+    garage.addCarDetail(getCarBase(2),400);
+    garage.addCarDetail(getCarBase(3),400);
+    garage.addCarDetail(getEngine(3),250);
+    garage.addCarDetail(getEngine(3),350);
+    garage.addCarDetail(getEngine(4),500);
+    garage.addCarDetail(getWheel(3),200);
+    garage.addCarDetail(getWheel(6),450);
+    garage.addCarDetail(getEngine(3),250);
+    garage.addCarDetail(getEngine(5),750);
+  }
+
+  public static Garage getGarage(){
+    if (garage == null){
+      initGarage();
+    }
+    return garage;
   }
 }
