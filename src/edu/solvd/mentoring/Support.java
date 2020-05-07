@@ -24,7 +24,6 @@ class Support {
   //
   //5 cars
   //3 routes
-  //1 garage
   private static HashMap<Integer, Surface> surfaces = new HashMap<>();
 
   private static HashMap<Integer, Wheel> wheels = new HashMap<>();
@@ -33,7 +32,6 @@ class Support {
 
   private static HashMap<Integer, Car> cars = new HashMap<>();
   private static HashMap<Integer, Route> routes = new HashMap<>();
-  private static Garage garage = null;
 
   //just a quick converter
   private static short s(int i){
@@ -395,23 +393,15 @@ class Support {
     return r;
   }
 
-  private static void initGarage(){
-    garage = new Garage();
-    garage.addCarDetail(getCarBase(2),400);
-    garage.addCarDetail(getCarBase(3),400);
-    garage.addCarDetail(getEngine(3),250);
-    garage.addCarDetail(getEngine(3),350);
-    garage.addCarDetail(getEngine(4),500);
-    garage.addCarDetail(getWheel(3),200);
-    garage.addCarDetail(getWheel(6),450);
-    garage.addCarDetail(getEngine(3),250);
-    garage.addCarDetail(getEngine(5),750);
-  }
-
-  public static Garage getGarage(){
-    if (garage == null){
-      initGarage();
-    }
-    return garage;
+  public static void initGarage(){
+    Garage.addCarDetail(getCarBase(2),400);
+    Garage.addCarDetail(getCarBase(3),400);
+    Garage.addCarDetail(getEngine(3),250);
+    Garage.addCarDetail(getEngine(3),350);
+    Garage.addCarDetail(getEngine(4),500);
+    Garage.addCarDetail(getWheel(3),200);
+    Garage.addCarDetail(getWheel(6),450);
+    Garage.addCarDetail(getEngine(3),250);
+    Garage.addCarDetail(getEngine(5),750);
   }
 }

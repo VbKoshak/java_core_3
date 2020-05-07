@@ -9,7 +9,7 @@ public class Game {
   private Race currentRace = null;
 
   public Game(String playerName){
-    this.garage = Support.getGarage();
+    Support.initGarage();
     this.player = new Player(Support.getCar(1),playerName);
   }
 
