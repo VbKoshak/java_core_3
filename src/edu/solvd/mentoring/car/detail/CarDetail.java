@@ -1,13 +1,12 @@
 package edu.solvd.mentoring.car.detail;
 
-import edu.solvd.mentoring.enums.DetailQuality;
+import edu.solvd.mentoring.enums.DetailRarity;
 
-public class CarDetail {
-  private DetailQuality quality;
+public abstract class CarDetail {
+  protected DetailRarity rarity;
   private String name;
 
-  public CarDetail(DetailQuality quality, String name) {
-    this.quality = quality;
+  public CarDetail(String name) {
     this.name = name;
   }
 
@@ -15,7 +14,9 @@ public class CarDetail {
     return name;
   }
 
-  public DetailQuality getQuality() {
-    return quality;
+  public DetailRarity getRarity() {
+    return rarity;
   }
+
+  protected abstract void calcRarity();
 }

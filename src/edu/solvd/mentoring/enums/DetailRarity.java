@@ -1,6 +1,6 @@
 package edu.solvd.mentoring.enums;
 
-public enum DetailQuality {
+public enum DetailRarity {
   S,
   A,
   B,

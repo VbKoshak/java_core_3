@@ -4,7 +4,6 @@ import edu.solvd.mentoring.car.Car;
 import edu.solvd.mentoring.car.detail.CarBase;
 import edu.solvd.mentoring.car.detail.Engine;
 import edu.solvd.mentoring.car.detail.Wheel;
-import edu.solvd.mentoring.enums.DetailQuality;
 import edu.solvd.mentoring.road.*;
 import edu.solvd.mentoring.road.Vector;
 import edu.solvd.mentoring.road.surface.Surface;
@@ -113,11 +112,11 @@ class Support {
 
 
 
-      wheels.put(1,new Wheel(DetailQuality.C,"Basic",wheelClutch1));
-      wheels.put(2,new Wheel(DetailQuality.B,"Sport",wheelClutch2));
-      wheels.put(3,new Wheel(DetailQuality.B,"OffRoad",wheelClutch3));
-      wheels.put(4,new Wheel(DetailQuality.A,"OffRoad II",wheelClutch4));
-      wheels.put(5,new Wheel(DetailQuality.S,"Universal LU",wheelClutch5));
+      wheels.put(1,new Wheel("Basic",wheelClutch1));
+      wheels.put(2,new Wheel("Sport",wheelClutch2));
+      wheels.put(3,new Wheel("OffRoad",wheelClutch3));
+      wheels.put(4,new Wheel("OffRoad II",wheelClutch4));
+      wheels.put(5,new Wheel("Universal LU",wheelClutch5));
   }
 
   public static Wheel getWheel(int id){
@@ -129,46 +128,18 @@ class Support {
 
   public static Wheel getGeneratedWheel(Map<Integer,Surface> surfaces){
     Map<Integer,Short> clutch = getGeneratedClutch(s(7),s(0),surfaces);
-    int avg = 0;
-    for (short val: clutch.values()){
-      avg += val;
-    }
-    avg = Math.round(avg/clutch.size());
-    DetailQuality dq;
-    switch (avg) {
-      case 1:
-      case 2:
-        dq = DetailQuality.C;
-        break;
-      case 3:
-      case 4:
-        dq = DetailQuality.B;
-        break;
-      case 5:
-      case 6:
-        dq = DetailQuality.A;
-        break;
-      case 7:
-        dq = DetailQuality.S;
-        break;
-      case 0:
-        default:
-          dq = DetailQuality.C;
-          break;
-    }
-    
-    return new Wheel(dq,DEFAULT_NAME,clutch);
+    return new Wheel(DEFAULT_NAME,clutch);
 
   }
 
   private static void initEngines(){
       //maxSpeed 0-7
       //boost 0-7
-      engines.put(1, new Engine(DetailQuality.C, "Horse 1v", s(1), s(1)));
-      engines.put(2, new Engine(DetailQuality.B, "Just fine", s(5), s(2)));
-      engines.put(3, new Engine(DetailQuality.B, "Rabbit power", s(2), s(5)));
-      engines.put(4, new Engine(DetailQuality.A, "HAUDI corp.", s(4), s(4)));
-      engines.put(5, new Engine(DetailQuality.S, "TERRARI v20", s(6), s(7)));
+      engines.put(1, new Engine("Horse 1v", s(1), s(1)));
+      engines.put(2, new Engine("Just fine", s(5), s(2)));
+      engines.put(3, new Engine("Rabbit power", s(2), s(5)));
+      engines.put(4, new Engine("HAUDI corp.", s(4), s(4)));
+      engines.put(5, new Engine("TERRARI v20", s(6), s(7)));
   }
 
   public static Engine getEngine(int id){
@@ -181,30 +152,7 @@ class Support {
   public static Engine getGeneratedEngine(){
     short speed = getShort(s(7),s(0));
     short boost = getShort(s(7),s(0));
-    DetailQuality dq;
-    int avg = Math.round(speed + boost);
-    switch (avg) {
-      case 1:
-      case 2:
-        dq = DetailQuality.C;
-        break;
-      case 3:
-      case 4:
-        dq = DetailQuality.B;
-        break;
-      case 5:
-      case 6:
-        dq = DetailQuality.A;
-        break;
-      case 7:
-        dq = DetailQuality.S;
-        break;
-      case 0:
-      default:
-        dq = DetailQuality.C;
-        break;
-    }
-    return new Engine(dq,DEFAULT_NAME,speed,boost);
+    return new Engine(DEFAULT_NAME,speed,boost);
   }
 
   private static void initCarBases(){
@@ -230,9 +178,9 @@ class Support {
 
       //maxSpeed 1-3
       //boost 1-3
-      carBases.put(1,new CarBase(DetailQuality.C,"Basic",s(1),s(1),baseClutch1));
-      carBases.put(2,new CarBase(DetailQuality.B,"Truck",s(1),s(2),baseClutch2));
-      carBases.put(3,new CarBase(DetailQuality.B,"Sport",s(2),s(1),baseClutch3));
+      carBases.put(1,new CarBase("Basic",s(1),s(1),baseClutch1));
+      carBases.put(2,new CarBase("Truck",s(1),s(2),baseClutch2));
+      carBases.put(3,new CarBase("Sport",s(2),s(1),baseClutch3));
 
   }
 
@@ -247,7 +195,7 @@ class Support {
     Map<Integer,Short> clutch = getGeneratedClutch(s(3),s(1),surfaces);
     short speed = getShort(s(3),s(1));
     short boost = getShort(s(3),s(1));
-    return new CarBase(DetailQuality.B,DEFAULT_NAME,speed,boost,clutch);
+    return new CarBase(DEFAULT_NAME,speed,boost,clutch);
   }
 
   private static void initCars(){

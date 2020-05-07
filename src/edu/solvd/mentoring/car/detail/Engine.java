@@ -1,14 +1,15 @@
 package edu.solvd.mentoring.car.detail;
 
-import edu.solvd.mentoring.enums.DetailQuality;
+import edu.solvd.mentoring.enums.DetailRarity;
 
 public class Engine extends CarDetail {
   private short maxSpeed;
   private short boost;
-  public Engine(DetailQuality quality, String name, short maxSpeed, short boost) {
-    super(quality, name);
+  public Engine(String name, short maxSpeed, short boost) {
+    super(name);
     this.maxSpeed = maxSpeed;
     this.boost = boost;
+    this.calcRarity();
   }
 
   public short getMaxSpeed() {
@@ -17,5 +18,11 @@ public class Engine extends CarDetail {
 
   public short getBoost() {
     return boost;
+  }
+
+  @Override
+  protected void calcRarity() {
+    //no logic yet
+    this.rarity = DetailRarity.B;
   }
 }
