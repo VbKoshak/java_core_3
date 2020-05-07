@@ -5,6 +5,7 @@ import edu.solvd.mentoring.car.detail.Engine;
 import edu.solvd.mentoring.car.detail.Wheel;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class Car {
   Engine engine;
@@ -13,7 +14,7 @@ public class Car {
 
   short maxSpeed;
   short boost;
-  HashMap<Integer,Short> clutch;
+  Map<Integer,Short> clutch;
 
   public Car(Engine engine, Wheel wheel, CarBase base){
     this.engine = engine;
@@ -66,7 +67,7 @@ public class Car {
     return boost;
   }
 
-  public HashMap<Integer, Short> getClutch() {
+  public Map<Integer, Short> getClutch() {
     return clutch;
   }
 

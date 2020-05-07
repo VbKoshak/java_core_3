@@ -3,13 +3,14 @@ package edu.solvd.mentoring.car.detail;
 import edu.solvd.mentoring.enums.DetailQuality;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class CarBase extends CarDetail {
   short basicMaxSpeed;
   short basicBoost;
-  HashMap<Integer,Short> basicClutch = new HashMap<>();
+  Map<Integer,Short> basicClutch = new HashMap<>();
 
-  public CarBase(DetailQuality quality, String name, short basicMaxSpeed, short basicBoost, HashMap<Integer,Short> basicClutch) {
+  public CarBase(DetailQuality quality, String name, short basicMaxSpeed, short basicBoost, Map<Integer,Short> basicClutch) {
     super(quality, name);
     this.basicBoost = basicBoost;
     this.basicClutch = basicClutch;
@@ -24,7 +25,7 @@ public class CarBase extends CarDetail {
     return basicBoost;
   }
 
-  public HashMap<Integer,Short> getBasicClutch() {
+  public Map<Integer,Short> getBasicClutch() {
     return basicClutch;
   }
 }

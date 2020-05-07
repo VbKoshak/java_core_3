@@ -3,11 +3,12 @@ package edu.solvd.mentoring;
 import edu.solvd.mentoring.car.detail.CarDetail;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class Garage {
-  private static HashMap<CarDetail, Integer> stock = new HashMap<>();
+  private static Map<CarDetail, Integer> stock = new HashMap<>();
 
-  public static HashMap<CarDetail, Integer> getStock() {
+  public static Map<CarDetail, Integer> getStock() {
     return stock;
   }
 

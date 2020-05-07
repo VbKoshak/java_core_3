@@ -2,13 +2,14 @@ package edu.solvd.mentoring.road;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import edu.solvd.mentoring.road.surface.Surface;
 
 public class Stage {
   private String stageName;
   private ArrayList<Vector> vectors = new ArrayList<>();
-  private HashMap<Double,Double> angles = new HashMap<>();
+  private Map<Double,Double> angles = new HashMap<>();
   private Surface surface;
   private double stageDistance;
 
@@ -51,7 +52,7 @@ public class Stage {
     return Math.acos((sub1_1 + sub1_2) / (sub2_1 * sub2_2));
   }
 
-  public HashMap<Double,Double> getAngles(){
+  public Map<Double,Double> getAngles(){
     return this.angles;
   }
 

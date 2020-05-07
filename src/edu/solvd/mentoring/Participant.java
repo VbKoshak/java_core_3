@@ -4,7 +4,6 @@ import edu.solvd.mentoring.car.Car;
 import edu.solvd.mentoring.road.Route;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 public class Participant {
@@ -12,7 +11,7 @@ public class Participant {
   private short currentSpeed;
   private double[] progressLeft;
   private double[] progress;
-  private ArrayList<HashMap<Double,Double>> veerMarks;
+  private ArrayList<Map<Double,Double>> veerMarks;
   private Integer[] surfacesId;
   private int currentStage = 0;
   private double kmGone = 0;
