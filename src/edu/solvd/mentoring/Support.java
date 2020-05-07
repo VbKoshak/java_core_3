@@ -32,6 +32,8 @@ class Support {
   private static Map<Integer, Route> routes = new HashMap<>();
 
   private static final String DEFAULT_NAME = "Some default name";
+  private static final short MAX_AXISLENGTH_INCREASE = 5;
+  private static final int DEFAULT_ROUTES_VECTOR_COUNT = 3;
 
   //just a quick converter
   private static short s(int i){
@@ -350,15 +352,14 @@ class Support {
   }
 
   private static Stage generateStage(int vectorCount, Surface surf, Point startWith){
-    final String DEFAULT_NAME = "someDefName";
-    final short MAX_INCREASE = 5;
+
     Point beginPoint = new Point(startWith);
-    Point endPoint = new Point(getShort(s(beginPoint.getX() + MAX_INCREASE), s(beginPoint.getX())),getShort(s(beginPoint.getY() + MAX_INCREASE), s(beginPoint.getY())));
+    Point endPoint = new Point(getShort(s(beginPoint.getX() + MAX_AXISLENGTH_INCREASE), s(beginPoint.getX())),getShort(s(beginPoint.getY() + MAX_AXISLENGTH_INCREASE), s(beginPoint.getY())));
     Stage st = new Stage(new Vector(new Point(beginPoint),new Point(endPoint)),DEFAULT_NAME,surf);
 
     for(int i = 0; i < vectorCount; i++){
       beginPoint = endPoint;
-      endPoint = new Point(getShort(s(beginPoint.getX() + MAX_INCREASE), s(beginPoint.getX())),getShort(s(beginPoint.getY() + MAX_INCREASE), s(beginPoint.getY())));
+      endPoint = new Point(getShort(s(beginPoint.getX() + MAX_AXISLENGTH_INCREASE), s(beginPoint.getX())),getShort(s(beginPoint.getY() + MAX_AXISLENGTH_INCREASE), s(beginPoint.getY())));
       st.addVector(new Vector(new Point(beginPoint), new Point(endPoint)));
     }
     return st;
@@ -377,13 +378,12 @@ class Support {
   }
 
   public static Route getGeneratedRoute(int stagesCount, Map<Integer,Surface> surfaces) {
-    final int DEFAULT_VECTOR_COUNT = 3;
-    Stage st = generateStage(DEFAULT_VECTOR_COUNT,getRandomSurface(surfaces),new Point(0,0));
+    Stage st = generateStage(DEFAULT_ROUTES_VECTOR_COUNT,getRandomSurface(surfaces),new Point(0,0));
     Point lastPoint = st.getLastPoint();
     Route r = new Route(st);
     stagesCount--;
     for (int i = 0; i < stagesCount; i++){
-      Stage stage = generateStage(DEFAULT_VECTOR_COUNT,getRandomSurface(surfaces),lastPoint);
+      Stage stage = generateStage(DEFAULT_ROUTES_VECTOR_COUNT,getRandomSurface(surfaces),lastPoint);
       lastPoint = stage.getLastPoint();
       r.addStage(stage);
     }
