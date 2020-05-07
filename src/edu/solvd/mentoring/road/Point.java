@@ -1,5 +1,11 @@
 package edu.solvd.mentoring.road;
 
+/**
+ * represents point as point in 2D with x,y ordinates system
+ * x - ordinate on x-axis
+ * y - ordinates on y-axis
+ */
+
 public class Point {
   private int x;
   private int y;
@@ -9,6 +15,12 @@ public class Point {
     this.y = y;
   }
 
+  /**
+   * Coping construtor
+   *
+   * copies ordinates from pt
+   * @param pt - point to copy from
+   */
   public Point(Point pt){
     this.x = pt.getX();
     this.y = pt.getY();

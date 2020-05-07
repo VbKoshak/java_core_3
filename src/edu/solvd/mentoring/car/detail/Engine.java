@@ -2,9 +2,24 @@ package edu.solvd.mentoring.car.detail;
 
 import edu.solvd.mentoring.enums.DetailRarity;
 
+/**
+ * Class engine as a part of a car
+ * has only speed and boost that increase car's characteristicks
+ */
 public class Engine extends CarDetail {
   private short maxSpeed;
   private short boost;
+
+  /**
+   * basic constructor for engine
+   *
+   * @param name represents the name of the detail
+   * @see CarDetail#name
+   * @param maxSpeed increase in maximum it gives to a car
+   * @see Car#maxSpeed
+   * @param boost increase in boost it gives to a car
+   * @see Car#boost
+   */
   public Engine(String name, short maxSpeed, short boost) {
     super(name);
     this.maxSpeed = maxSpeed;
@@ -20,6 +35,11 @@ public class Engine extends CarDetail {
     return boost;
   }
 
+  /**
+   * @see CarBase#calcRarity()
+   *
+   * implementation to be provided
+   */
   @Override
   protected void calcRarity() {
     //no logic yet

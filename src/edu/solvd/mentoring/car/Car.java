@@ -7,11 +7,30 @@ import edu.solvd.mentoring.car.detail.Wheel;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Car class
+ * contains details it is build from
+ * and total characteristicks calculated based on details
+ */
 public class Car {
+  /**
+   * car details
+   *
+   * @see CarBase
+   * @see Engine
+   * @see Wheel
+   */
   Engine engine;
   Wheel wheel;
   CarBase carBase;
 
+  /**
+   * total car characteristicks that define it's movement
+   *
+   * maxSpeed defines maximum speed car can achieve
+   * boost defines chance to increase speed
+   * clutch defines how well car goes on different surfaces
+   */
   short maxSpeed;
   short boost;
   Map<Integer,Short> clutch;
@@ -23,6 +42,9 @@ public class Car {
     calculateCharacteristicks();
   }
 
+  /**
+   * method that is used to calculate final characteristicks based on details car possess
+   */
   private void calculateCharacteristicks(){
     this.maxSpeed = (short)(carBase.getBasicMaxSpeed() + engine.getMaxSpeed());
     this.boost = (short)(carBase.getBasicBoost() + engine.getBoost());
@@ -71,6 +93,12 @@ public class Car {
     return clutch;
   }
 
+  /**
+   * returns clutch on a particular surface using surface id
+   *
+   * @param id id of a surface
+   * @return clutch on surface with such id
+   */
   public short getClutchBySurfaceId(Integer id){
     return this.clutch.get(id);
   }
