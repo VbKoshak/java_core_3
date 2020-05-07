@@ -366,7 +366,6 @@ class Support {
       endPoint = new Point(getShort(s(beginPoint.getX() + MAX_INCREASE), s(beginPoint.getX())),getShort(s(beginPoint.getY() + MAX_INCREASE), s(beginPoint.getY())));
       st.addVector(new Vector(new Point(beginPoint), new Point(endPoint)));
     }
-
     return st;
   }
 
@@ -397,6 +396,7 @@ class Support {
   }
 
   private static void initGarage(){
+    garage = new Garage();
     garage.addCarDetail(getCarBase(2),400);
     garage.addCarDetail(getCarBase(3),400);
     garage.addCarDetail(getEngine(3),250);
