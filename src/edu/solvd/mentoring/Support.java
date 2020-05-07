@@ -33,6 +33,8 @@ class Support {
   private static HashMap<Integer, Car> cars = new HashMap<>();
   private static HashMap<Integer, Route> routes = new HashMap<>();
 
+  private static final String DEFAULT_NAME = "Some default name";
+
   //just a quick converter
   private static short s(int i){
     return (short)i;
@@ -154,9 +156,8 @@ class Support {
           dq = DetailQuality.C;
           break;
     }
-
-    final String defaultName = "someBasicWheel";
-    return new Wheel(dq,defaultName,clutch);
+    
+    return new Wheel(dq,DEFAULT_NAME,clutch);
 
   }
 
@@ -178,7 +179,6 @@ class Support {
   }
 
   public static Engine getGeneratedEngine(){
-    final String defaultName = "someBasicEngine";
     short speed = getShort(s(7),s(0));
     short boost = getShort(s(7),s(0));
     DetailQuality dq;
@@ -204,7 +204,7 @@ class Support {
         dq = DetailQuality.C;
         break;
     }
-    return new Engine(dq,defaultName,speed,boost);
+    return new Engine(dq,DEFAULT_NAME,speed,boost);
   }
 
   private static void initCarBases(){
@@ -247,8 +247,7 @@ class Support {
     HashMap<Integer,Short> clutch = getGeneratedClutch(s(3),s(1),surfaces);
     short speed = getShort(s(3),s(1));
     short boost = getShort(s(3),s(1));
-    final String defaultName = "someBasicCarBase";
-    return new CarBase(DetailQuality.B,defaultName,speed,boost,clutch);
+    return new CarBase(DetailQuality.B,DEFAULT_NAME,speed,boost,clutch);
   }
 
   private static void initCars(){
