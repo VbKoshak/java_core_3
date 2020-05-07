@@ -30,10 +30,6 @@ class Support {
   private static Map<Integer, Car> cars = new HashMap<>();
   private static Map<Integer, Route> routes = new HashMap<>();
 
-  private static final String DEFAULT_NAME = "Some default name";
-  private static final short MAX_AXISLENGTH_INCREASE = 5;
-  private static final int DEFAULT_ROUTES_VECTOR_COUNT = 3;
-
   //just a quick converter
   private static short s(int i){
     return (short)i;
@@ -49,7 +45,7 @@ class Support {
     Set<Integer> surfaceKeys = surfaces.keySet();
 
     for(Integer i: surfaceKeys){
-      short val = s(getShort(maxClutch,minClutch));
+      short val = getShort(maxClutch,minClutch);
       clutch.put(i,val);
     }
 
@@ -127,8 +123,8 @@ class Support {
   }
 
   public static Wheel getGeneratedWheel(Map<Integer,Surface> surfaces){
-    Map<Integer,Short> clutch = getGeneratedClutch(s(7),s(0),surfaces);
-    return new Wheel(DEFAULT_NAME,clutch);
+    Map<Integer,Short> clutch = getGeneratedClutch(Constants.MAX_WHEEL_CLUTCH,Constants.MIN_WHEEL_CLUTCH,surfaces);
+    return new Wheel(Constants.DEFAULT_NAME,clutch);
 
   }
 
@@ -150,9 +146,9 @@ class Support {
   }
 
   public static Engine getGeneratedEngine(){
-    short speed = getShort(s(7),s(0));
-    short boost = getShort(s(7),s(0));
-    return new Engine(DEFAULT_NAME,speed,boost);
+    short speed = getShort(Constants.MAX_ENGINE_SPEED,Constants.MIN_ENGINE_SPEED);
+    short boost = getShort(Constants.MAX_ENGINE_BOOST,Constants.MIN_ENGINE_BOOST);
+    return new Engine(Constants.DEFAULT_NAME,speed,boost);
   }
 
   private static void initCarBases(){
@@ -192,10 +188,10 @@ class Support {
   }
 
   public static CarBase getGeneratedCarBase(Map<Integer,Surface> surfaces){
-    Map<Integer,Short> clutch = getGeneratedClutch(s(3),s(1),surfaces);
-    short speed = getShort(s(3),s(1));
-    short boost = getShort(s(3),s(1));
-    return new CarBase(DEFAULT_NAME,speed,boost,clutch);
+    Map<Integer,Short> clutch = getGeneratedClutch(Constants.MAX_CARBASE_CLUTCH,Constants.MIN_CARBASE_CLUTCH,surfaces);
+    short speed = getShort(Constants.MAX_CARBASE_SPEED,Constants.MIN_CARBASE_SPEED);
+    short boost = getShort(Constants.MAX_CARBASE_BOOST,Constants.MIN_CARBASE_BOOST);
+    return new CarBase(Constants.DEFAULT_NAME,speed,boost,clutch);
   }
 
   private static void initCars(){
@@ -302,12 +298,12 @@ class Support {
   private static Stage generateStage(int vectorCount, Surface surf, Point startWith){
 
     Point beginPoint = new Point(startWith);
-    Point endPoint = new Point(getShort(s(beginPoint.getX() + MAX_AXISLENGTH_INCREASE), s(beginPoint.getX())),getShort(s(beginPoint.getY() + MAX_AXISLENGTH_INCREASE), s(beginPoint.getY())));
-    Stage st = new Stage(new Vector(new Point(beginPoint),new Point(endPoint)),DEFAULT_NAME,surf);
+    Point endPoint = new Point(getShort(s(beginPoint.getX() + Constants.MAX_AXISLENGTH_INCREASE), s(beginPoint.getX())),getShort(s(beginPoint.getY() + Constants.MAX_AXISLENGTH_INCREASE), s(beginPoint.getY())));
+    Stage st = new Stage(new Vector(new Point(beginPoint),new Point(endPoint)),Constants.DEFAULT_NAME,surf);
 
     for(int i = 0; i < vectorCount; i++){
       beginPoint = endPoint;
-      endPoint = new Point(getShort(s(beginPoint.getX() + MAX_AXISLENGTH_INCREASE), s(beginPoint.getX())),getShort(s(beginPoint.getY() + MAX_AXISLENGTH_INCREASE), s(beginPoint.getY())));
+      endPoint = new Point(getShort(s(beginPoint.getX() + Constants.MAX_AXISLENGTH_INCREASE), s(beginPoint.getX())),getShort(s(beginPoint.getY() + Constants.MAX_AXISLENGTH_INCREASE), s(beginPoint.getY())));
       st.addVector(new Vector(new Point(beginPoint), new Point(endPoint)));
     }
     return st;
@@ -326,12 +322,12 @@ class Support {
   }
 
   public static Route getGeneratedRoute(int stagesCount, Map<Integer,Surface> surfaces) {
-    Stage st = generateStage(DEFAULT_ROUTES_VECTOR_COUNT,getRandomSurface(surfaces),new Point(0,0));
+    Stage st = generateStage(Constants.DEFAULT_ROUTES_VECTOR_COUNT,getRandomSurface(surfaces),new Point(0,0));
     Point lastPoint = st.getLastPoint();
     Route r = new Route(st);
     stagesCount--;
     for (int i = 0; i < stagesCount; i++){
-      Stage stage = generateStage(DEFAULT_ROUTES_VECTOR_COUNT,getRandomSurface(surfaces),lastPoint);
+      Stage stage = generateStage(Constants.DEFAULT_ROUTES_VECTOR_COUNT,getRandomSurface(surfaces),lastPoint);
       lastPoint = stage.getLastPoint();
       r.addStage(stage);
     }
