@@ -40,7 +40,7 @@ public class Garage {
    * @param detail - detail which price want to be known
    * @return price of the given detail
    */
-  public static Integer getPrice(CarDetail detail){
+  public static int getPrice(CarDetail detail){
     return stock.get(detail);
   }
 
