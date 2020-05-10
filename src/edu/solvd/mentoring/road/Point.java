@@ -6,7 +6,7 @@ package edu.solvd.mentoring.road;
  * y - ordinates on y-axis
  */
 
-public class Point {
+public class Point implements  Cloneable  {
   private int x;
   private int y;
 
@@ -15,15 +15,13 @@ public class Point {
     this.y = y;
   }
 
-  /**
-   * Coping construtor
-   *
-   * copies ordinates from pt
-   * @param pt - point to copy from
-   */
-  public Point(Point pt){
-    this.x = pt.getX();
-    this.y = pt.getY();
+  @Override
+  public Point clone(){
+    try {
+      return (Point)super.clone();
+    } catch (CloneNotSupportedException ex ){
+      throw new InternalError();
+    }
   }
 
   public int getX() {

@@ -429,14 +429,14 @@ class Support {
    */
   private static Stage generateStage(int vectorCount, Surface surf, Point startWith){
 
-    Point beginPoint = new Point(startWith);
+    Point beginPoint = startWith.clone();
     Point endPoint = new Point(getShort(s(beginPoint.getX() + Settings.MAX_AXISLENGTH_INCREASE), s(beginPoint.getX())),getShort(s(beginPoint.getY() + Settings.MAX_AXISLENGTH_INCREASE), s(beginPoint.getY())));
-    Stage st = new Stage(new Vector(new Point(beginPoint),new Point(endPoint)), Settings.DEFAULT_NAME,surf);
+    Stage st = new Stage(new Vector(beginPoint.clone(),endPoint.clone()), Settings.DEFAULT_NAME,surf);
 
     for(int i = 0; i < vectorCount; i++){
       beginPoint = endPoint;
       endPoint = new Point(getShort(s(beginPoint.getX() + Settings.MAX_AXISLENGTH_INCREASE), s(beginPoint.getX())),getShort(s(beginPoint.getY() + Settings.MAX_AXISLENGTH_INCREASE), s(beginPoint.getY())));
-      st.addVector(new Vector(new Point(beginPoint), new Point(endPoint)));
+      st.addVector(new Vector(beginPoint.clone(),endPoint.clone()));
     }
     return st;
   }
