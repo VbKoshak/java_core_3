@@ -1,10 +1,8 @@
 package edu.solvd.mentoring.exceptions;
 
-public class LogicErrorException extends Throwable{
-  private String msg;
-
+public class LogicErrorException extends IncorrectInputException{
   public LogicErrorException(String msg){
-    this.msg = msg;
+    super(msg);
   }
 
   @Override

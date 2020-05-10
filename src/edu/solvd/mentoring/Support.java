@@ -5,8 +5,7 @@ import edu.solvd.mentoring.car.detail.CarBase;
 import edu.solvd.mentoring.car.detail.Engine;
 import edu.solvd.mentoring.car.detail.Wheel;
 import edu.solvd.mentoring.enums.ErrReason;
-import edu.solvd.mentoring.exceptions.IncorrectInputException;
-import edu.solvd.mentoring.exceptions.InappropriateNumException;
+import edu.solvd.mentoring.exceptions.IncorrectInputExceptionHandler;
 import edu.solvd.mentoring.road.*;
 import edu.solvd.mentoring.road.Vector;
 import edu.solvd.mentoring.road.surface.Surface;
@@ -60,10 +59,10 @@ class Support {
   private static short s(int i) {
     try{
       if (i > 32767 || i < -32768) {
-        throw new IncorrectInputException(ErrReason.InappropriateNum,"ToShort " + i + " ");
+        throw new IncorrectInputExceptionHandler(ErrReason.InappropriateNum,"ToShort " + i + " ");
       }
       return (short)i;
-    } catch (IncorrectInputException err) {
+    } catch (IncorrectInputExceptionHandler err) {
       System.out.println(err.showMessage());
       return 0;
     }
@@ -71,10 +70,10 @@ class Support {
   private static short s(double i) {
     try {
       if (i > 32767 || i < -32768) {
-        throw new IncorrectInputException(ErrReason.InappropriateNum,"ToShort " + i + " ");
+        throw new IncorrectInputExceptionHandler(ErrReason.InappropriateNum,"ToShort " + i + " ");
       }
       return (short)i;
-    } catch (IncorrectInputException err) {
+    } catch (IncorrectInputExceptionHandler err) {
       System.out.println(err.showMessage());
       return 0;
     }
@@ -103,12 +102,12 @@ class Support {
     Set<Integer> surfaceKeys = surfaces.keySet();
     try {
       if (surfaceKeys.size() == 0) {
-        throw new IncorrectInputException(ErrReason.EmptyArray,"Surfaces");
+        throw new IncorrectInputExceptionHandler(ErrReason.EmptyArray,"Surfaces");
       }
       if (maxClutch <= minClutch) {
-        throw new IncorrectInputException(ErrReason.LogicError,"Min and Max Clutch values");
+        throw new IncorrectInputExceptionHandler(ErrReason.LogicError,"Min and Max Clutch values");
       }
-    } catch (IncorrectInputException  exc){
+    } catch (IncorrectInputExceptionHandler exc){
       exc.showMessage();
     }
 

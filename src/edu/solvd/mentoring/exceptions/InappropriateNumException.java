@@ -1,10 +1,8 @@
 package edu.solvd.mentoring.exceptions;
 
-public class InappropriateNumException extends RuntimeException{
-  private String msg;
-
+public class InappropriateNumException extends IncorrectInputException{
   public InappropriateNumException(String msg){
-    this.msg = msg;
+    super(msg);
   }
 
   @Override

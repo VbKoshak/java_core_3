@@ -1,9 +1,8 @@
 package edu.solvd.mentoring.exceptions;
 
-public class EmptyArrayException extends Throwable {
-  private String msg;
+public class EmptyArrayException extends IncorrectInputException {
   public EmptyArrayException(String msg){
-    this.msg = msg;
+    super(msg);
   }
 
   @Override
