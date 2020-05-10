@@ -10,17 +10,36 @@ import edu.solvd.mentoring.road.surface.Surface;
 
 import java.util.*;
 
+/**
+ * Support class that helps to generate some instances of everythiing in the game)
+ *
+ * contains :
+ *  pre-defined
+ *    4 surfaces
+ *    5 wheels
+ *    5 engines
+ *    3 carBases
+ *    5 cars
+ *    3 routes
+ *    1 garage
+ *  generators for:
+ *    Wheel
+ *    Engine
+ *    CarBase
+ *    Car
+ *    Route
+ */
 class Support {
-  // make it random so for every new Support() different values are generated
-  //
-  //4 surfaces
-  //
-  //5 wheels
-  //5 engines
-  //3 carBases
-  //
-  //5 cars
-  //3 routes
+  /**
+   * map of pre-defined
+   *    surfaces
+   *    wheels
+   *    engines
+   *    CarBases
+   *    Cars
+   *    Routes
+   * where key is id of pre-defined object
+   */
   private static Map<Integer, Surface> surfaces = new HashMap<>();
 
   private static Map<Integer, Wheel> wheels = new HashMap<>();
@@ -30,16 +49,34 @@ class Support {
   private static Map<Integer, Car> cars = new HashMap<>();
   private static Map<Integer, Route> routes = new HashMap<>();
 
-  //just a quick converter
+  /**
+   * quick converter to Short from int and double
+   * @param i value to convert
+   * @return short variant of i
+   */
   private static short s(int i){
     return (short)i;
   }
-  private static short s(double d){ return (short)d; }
+  private static short s(double i){ return (short)i; }
 
-  //some additional Functions
+
+  /**
+   * returnes a random short value from minValue to maxValue included
+   * @param maxValue - upper bound of a short
+   * @param minValue - lower bound of a short
+   * @return some random short from minValue to maxValue
+   */
   private static short getShort(short maxValue, short minValue){
     return (short)(Math.round(Math.random() * (maxValue - minValue)) + minValue);
   }
+
+  /**
+   * return a random clutch for certain surfaces map with values between minValue and maxValue
+   * @param maxClutch - maximum value of clutch
+   * @param minClutch - minimum value of clutch
+   * @param surfaces - surface map to get clutch for
+   * @return Clutch corresponding to requested surface Map
+   */
   private static Map<Integer,Short> getGeneratedClutch(short maxClutch, short minClutch, Map<Integer,Surface> surfaces){
     Map<Integer,Short> clutch = new HashMap<>();
     Set<Integer> surfaceKeys = surfaces.keySet();
@@ -52,6 +89,9 @@ class Support {
     return clutch;
   }
 
+  /**
+   * initialize some basic manually pre-defined Surfaces and put them in this.surfaces
+   */
   private static void initSurfaces(){
       surfaces.put(1,new Surface("highway",'=',1));
       surfaces.put(2,new Surface("city road",'-',2));
@@ -59,6 +99,11 @@ class Support {
       surfaces.put(4,new Surface("country road",'*',4));
   }
 
+  /**
+   * returnes a Surface from predefined values by id
+   * @param id - surface id to get
+   * @return surface, corresponding to given id
+   */
   public static Surface getSurface(int id){
     if (surfaces.isEmpty()){
       initSurfaces();
@@ -66,6 +111,27 @@ class Support {
     return surfaces.get(id);
   }
 
+  /**
+   * returnes a random Surfaces from a given Map
+   * @param surfaces a map of surfaces to choose from
+   * @return surface a random surface from the map
+   */
+  private static Surface getRandomSurface(Map<Integer, Surface> surfaces){
+    Set<Integer> surfaceKeys = surfaces.keySet();
+    Random rand = new Random();
+
+    int index = rand.nextInt(surfaceKeys.size());
+    Iterator<Integer> iter = surfaceKeys.iterator();
+    for (int i = 0; i < index; i++) {
+      iter.next();
+    }
+    return surfaces.get(iter.next());
+  }
+
+  /**
+   * return a map of manually pre-defined surfaces
+   * @return Map of surfaces
+   */
   public static Map<Integer, Surface> getSurfaces(){
     if (surfaces.isEmpty()){
       initSurfaces();
@@ -73,6 +139,9 @@ class Support {
     return surfaces;
   }
 
+  /**
+   * initialize some basic manually pre-defined Wheels and put them in this.wheels
+   */
   private static void initWheels(){
       Map<Integer,Short> wheelClutch1 = new HashMap<>();
       Map<Integer,Short> wheelClutch2 = new HashMap<>();
@@ -115,6 +184,11 @@ class Support {
       wheels.put(5,new Wheel("Universal LU",wheelClutch5));
   }
 
+  /**
+   * returnes a Wheel from predefined values by id
+   * @param id - whell id to get
+   * @return wheel, corresponding to given id
+   */
   public static Wheel getWheel(int id){
     if(wheels.isEmpty() == true){
       initWheels();
@@ -122,12 +196,20 @@ class Support {
     return wheels.get(id);
   }
 
+  /**
+   * generate a wheel with random characteristics according to Settings
+   * @param surfaces surfaces for a wheel to be able to go with
+   * @return Wheel
+   */
   public static Wheel getGeneratedWheel(Map<Integer,Surface> surfaces){
-    Map<Integer,Short> clutch = getGeneratedClutch(Constants.MAX_WHEEL_CLUTCH,Constants.MIN_WHEEL_CLUTCH,surfaces);
-    return new Wheel(Constants.DEFAULT_NAME,clutch);
+    Map<Integer,Short> clutch = getGeneratedClutch(Settings.MAX_WHEEL_CLUTCH, Settings.MIN_WHEEL_CLUTCH,surfaces);
+    return new Wheel(Settings.DEFAULT_NAME,clutch);
 
   }
 
+  /**
+   * initialize some basic manually pre-defined Engines and put them in this.engines
+   */
   private static void initEngines(){
       //maxSpeed 0-7
       //boost 0-7
@@ -138,6 +220,11 @@ class Support {
       engines.put(5, new Engine("TERRARI v20", s(6), s(7)));
   }
 
+  /**
+   * returnes an Engine from predefined values by id
+   * @param id - engine id to get
+   * @return engine, corresponding to given id
+   */
   public static Engine getEngine(int id){
     if(engines.isEmpty()){
       initEngines();
@@ -145,12 +232,19 @@ class Support {
     return engines.get(id);
   }
 
+  /**
+   * generate an engine with random characteristics according to Settings
+   * @return Engine
+   */
   public static Engine getGeneratedEngine(){
-    short speed = getShort(Constants.MAX_ENGINE_SPEED,Constants.MIN_ENGINE_SPEED);
-    short boost = getShort(Constants.MAX_ENGINE_BOOST,Constants.MIN_ENGINE_BOOST);
-    return new Engine(Constants.DEFAULT_NAME,speed,boost);
+    short speed = getShort(Settings.MAX_ENGINE_SPEED, Settings.MIN_ENGINE_SPEED);
+    short boost = getShort(Settings.MAX_ENGINE_BOOST, Settings.MIN_ENGINE_BOOST);
+    return new Engine(Settings.DEFAULT_NAME,speed,boost);
   }
 
+  /**
+   * initialize some basic manually pre-defined CarBases and put them in this.carBases
+   */
   private static void initCarBases(){
       Map<Integer,Short> baseClutch1 = new HashMap<>();
       Map<Integer,Short> baseClutch2 = new HashMap<>();
@@ -180,6 +274,11 @@ class Support {
 
   }
 
+  /**
+   * returnes a CarBase from predefined values by id
+   * @param id - CarBase id to get
+   * @return carBase, corresponding to given id
+   */
   public static CarBase getCarBase(int id){
     if(carBases.isEmpty()){
       initCarBases();
@@ -187,13 +286,21 @@ class Support {
     return carBases.get(id);
   }
 
+  /**
+   * generate a CarBase with random characteristics according to Settings
+   * @param surfaces surfaces for a carBase to be able to deal with
+   * @return CarBase
+   */
   public static CarBase getGeneratedCarBase(Map<Integer,Surface> surfaces){
-    Map<Integer,Short> clutch = getGeneratedClutch(Constants.MAX_CARBASE_CLUTCH,Constants.MIN_CARBASE_CLUTCH,surfaces);
-    short speed = getShort(Constants.MAX_CARBASE_SPEED,Constants.MIN_CARBASE_SPEED);
-    short boost = getShort(Constants.MAX_CARBASE_BOOST,Constants.MIN_CARBASE_BOOST);
-    return new CarBase(Constants.DEFAULT_NAME,speed,boost,clutch);
+    Map<Integer,Short> clutch = getGeneratedClutch(Settings.MAX_CARBASE_CLUTCH, Settings.MIN_CARBASE_CLUTCH,surfaces);
+    short speed = getShort(Settings.MAX_CARBASE_SPEED, Settings.MIN_CARBASE_SPEED);
+    short boost = getShort(Settings.MAX_CARBASE_BOOST, Settings.MIN_CARBASE_BOOST);
+    return new CarBase(Settings.DEFAULT_NAME,speed,boost,clutch);
   }
 
+  /**
+   * initialize some basic manually pre-defined Cars and put them in this.cars
+   */
   private static void initCars(){
       cars.put(1, new Car(getEngine(1), getWheel(1), getCarBase(1)));
       cars.put(2, new Car(getEngine(3), getWheel(2), getCarBase(2)));
@@ -202,6 +309,11 @@ class Support {
       cars.put(5, new Car(getEngine(3), getWheel(4), getCarBase(1)));
   }
 
+  /**
+   * returnes a Car from predefined values by id
+   * @param id - Car id to get
+   * @return Car, corresponding to given id
+   */
   public static Car getCar(int id){
     if(cars.isEmpty()){
       initCars();
@@ -209,10 +321,18 @@ class Support {
     return cars.get(id);
   }
 
+  /**
+   * generate a Car with random characteristics according to Settings
+   * @param surfaces surfaces for a car to be able to deal with
+   * @return Car
+   */
   public static Car getGeneratedCar(Map<Integer,Surface> surfaces){
     return new Car(getGeneratedEngine(),getGeneratedWheel(surfaces),getGeneratedCarBase(surfaces));
   }
 
+  /**
+   * initialize some basic manually pre-defined Routes and put them in this.routes
+   */
   private static void initRoutes(){
       Vector v1 = new Vector(new Point(1, 1), new Point(2, 4));
       Vector v2 = new Vector(new Point(2, 4), new Point(5, 2));
@@ -288,6 +408,11 @@ class Support {
       routes.put(3, r3);
   }
 
+  /**
+   * returnes a Route from predefined values by id
+   * @param id - route id to get
+   * @return route, corresponding to given id
+   */
   public static Route getRoute(int id){
     if(routes.isEmpty()){
       initRoutes();
@@ -295,45 +420,49 @@ class Support {
     return routes.get(id);
   }
 
+  /**
+   *  generate a stage with given amount of vectos, surface and startPoint
+   * @param vectorCount - number f vectors in the stage
+   * @param surf - surface for a stage
+   * @param startWith - Point where Stage begins
+   * @return Stage
+   */
   private static Stage generateStage(int vectorCount, Surface surf, Point startWith){
 
-    Point beginPoint = new Point(startWith);
-    Point endPoint = new Point(getShort(s(beginPoint.getX() + Constants.MAX_AXISLENGTH_INCREASE), s(beginPoint.getX())),getShort(s(beginPoint.getY() + Constants.MAX_AXISLENGTH_INCREASE), s(beginPoint.getY())));
-    Stage st = new Stage(new Vector(new Point(beginPoint),new Point(endPoint)),Constants.DEFAULT_NAME,surf);
+    Point beginPoint = startWith.clone();
+    Point endPoint = new Point(getShort(s(beginPoint.getX() + Settings.MAX_AXISLENGTH_INCREASE), s(beginPoint.getX())),getShort(s(beginPoint.getY() + Settings.MAX_AXISLENGTH_INCREASE), s(beginPoint.getY())));
+    Stage st = new Stage(new Vector(beginPoint.clone(),endPoint.clone()), Settings.DEFAULT_NAME,surf);
 
     for(int i = 0; i < vectorCount; i++){
       beginPoint = endPoint;
-      endPoint = new Point(getShort(s(beginPoint.getX() + Constants.MAX_AXISLENGTH_INCREASE), s(beginPoint.getX())),getShort(s(beginPoint.getY() + Constants.MAX_AXISLENGTH_INCREASE), s(beginPoint.getY())));
-      st.addVector(new Vector(new Point(beginPoint), new Point(endPoint)));
+      endPoint = new Point(getShort(s(beginPoint.getX() + Settings.MAX_AXISLENGTH_INCREASE), s(beginPoint.getX())),getShort(s(beginPoint.getY() + Settings.MAX_AXISLENGTH_INCREASE), s(beginPoint.getY())));
+      st.addVector(new Vector(beginPoint.clone(),endPoint.clone()));
     }
     return st;
   }
 
-  private static Surface getRandomSurface(Map<Integer, Surface> surfaces){
-    Set<Integer> surfaceKeys = surfaces.keySet();
-    Random rand = new Random();
-
-    int index = rand.nextInt(surfaceKeys.size());
-    Iterator<Integer> iter = surfaceKeys.iterator();
-    for (int i = 0; i < index; i++) {
-      iter.next();
-    }
-    return surfaces.get(iter.next());
-  }
-
+  /**
+   * returnes a randomly generated route according to settings with given amount of stages and surfaces
+   * @param stagesCount - number of stages in Route
+   * @param surfaces - map of available surfaces for the current Route
+   * @return Route
+   */
   public static Route getGeneratedRoute(int stagesCount, Map<Integer,Surface> surfaces) {
-    Stage st = generateStage(Constants.DEFAULT_ROUTES_VECTOR_COUNT,getRandomSurface(surfaces),new Point(0,0));
+    Stage st = generateStage(Settings.DEFAULT_ROUTES_VECTOR_COUNT,getRandomSurface(surfaces),new Point(0,0));
     Point lastPoint = st.getLastPoint();
     Route r = new Route(st);
     stagesCount--;
     for (int i = 0; i < stagesCount; i++){
-      Stage stage = generateStage(Constants.DEFAULT_ROUTES_VECTOR_COUNT,getRandomSurface(surfaces),lastPoint);
+      Stage stage = generateStage(Settings.DEFAULT_ROUTES_VECTOR_COUNT,getRandomSurface(surfaces),lastPoint);
       lastPoint = stage.getLastPoint();
       r.addStage(stage);
     }
     return r;
   }
 
+  /**
+   * initialize some basic manually pre-defined garage and put them in this.garage
+   */
   public static void initGarage(){
     Garage.addCarDetail(getCarBase(2),400);
     Garage.addCarDetail(getCarBase(3),400);

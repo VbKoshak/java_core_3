@@ -1,6 +1,11 @@
 package edu.solvd.mentoring.road.surface;
 
 public class Surface {
+  /**
+   * name for better user differentiation
+   * sym is used in graphical interpretation of the road
+   * surfaceId is  used to identificate surface within programm
+   */
   private String name;
   private char sym;
   private int surfaceId;
