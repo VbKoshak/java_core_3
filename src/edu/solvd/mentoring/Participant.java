@@ -71,7 +71,7 @@ public class Participant {
    * tries to increase players speed if possible (depends on boost property of a car)
    */
   private void tryBoost(){
-    if (Math.random() > this.car.getBoost() / (Constants.MAX_ENGINE_BOOST + Constants.MAX_CARBASE_BOOST)){
+    if (Math.random() > this.car.getBoost() / (Settings.MAX_ENGINE_BOOST + Settings.MAX_CARBASE_BOOST)){
       this.currentSpeed++;
     }
   }
@@ -118,7 +118,7 @@ public class Participant {
   private void checkAngles(double surfaceMovement){
     if(this.currentSpeed > 2){
       if ( haveSharpAngles(this.progress[this.currentStage],surfaceMovement) == true){
-        this.currentSpeed = (short)Math.ceil(this.currentSpeed * (1 - Constants.SPEED_DECREASE));
+        this.currentSpeed = (short)Math.ceil(this.currentSpeed * (1 - Settings.SPEED_DECREASE));
       }
     }
   }

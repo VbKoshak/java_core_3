@@ -5,13 +5,14 @@ package edu.solvd.mentoring;
  * !IMPORTANT! do not influence predefined sets of element
  * @see Support#initSurfaces , Support#initWheels etc.
  */
-public class Constants {
+public class Settings {
   /**
    * DEFAULT_NAME - name used for generated carDetails
    * MAX(MIN)_AXISLENGTH_INCREASE - maximum (minimum) increase in axes between to ordered points of the road
    * DEFAULT_ROUTES_VECTOR_COUNT - default number of vectors in route
    * MAX(MIN)_ENGINE_SPEED - maximum(minimum) speed engine can possess
    * SPEED_DECREASE - value from [0-1] showing the lost in speed after sharp angle
+   * DEFAULT_MONEY - amount of money player starts to play with
    * same goes with:
    *        MAX(MIN)_ENGINE_BOOST
    *        MAX(MIN)_WHEEL_CLUTCH
@@ -35,4 +36,5 @@ public class Constants {
   public static final short MAX_CARBASE_CLUTCH = 3;
   public static final short MIN_CARBASE_CLUTCH = 1;
   public static final double SPEED_DECREASE = 0.4;
+  public static final int DEFAULT_MONEY = 100;
 }
