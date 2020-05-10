@@ -15,6 +15,15 @@ public class Point implements  Cloneable  {
     this.y = y;
   }
 
+  /**
+   * Coping consructor
+   * @param from - coping 'from' Point
+   */
+  public Point(Point from){
+    this.x = from.getX();
+    this.y = from.getY();
+  }
+
   @Override
   public Point clone(){
     try {
