@@ -1,6 +1,7 @@
 package edu.solvd.mentoring.road;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * the road that cars take race in
@@ -19,7 +20,7 @@ public class Route {
    * length - number of stages in the route
    */
   private double totalDistance;
-  private ArrayList<Stage> stages = new ArrayList<>();
+  private List<Stage> stages = new ArrayList<>();
   private String points = "|";
   private int length;
   private int charLength = 5;

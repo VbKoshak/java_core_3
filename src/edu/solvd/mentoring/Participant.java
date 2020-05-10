@@ -4,6 +4,7 @@ import edu.solvd.mentoring.car.Car;
 import edu.solvd.mentoring.road.Route;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class Participant {
@@ -11,34 +12,42 @@ public class Participant {
    * participant's car
    */
   private Car car;
+
   /**
    * current speed of a participant's car
    */
   private short currentSpeed;
+
   /**
    * distance left until finish of i stage
    */
   private double[] progressLeft;
+
   /**
    * distance gone in each stage
    */
   private double[] progress;
+
   /**
    * shows the list of destances from the start where angle appears and the value of the angle for each stage
    */
-  private ArrayList<Map<Double,Double>> veerMarks;
+  private List<Map<Double,Double>> veerMarks;
+
   /**
    * ids of surfaces in stages of the route
    */
   private Integer[] surfacesId;
+
   /**
    * current stage, where player's car is
    */
   private int currentStage = 0;
+
   /**
    * total distance gone from the start line
    */
   private double kmGone = 0;
+
   /**
    * symbol that represents participant's icon in the current race
    */

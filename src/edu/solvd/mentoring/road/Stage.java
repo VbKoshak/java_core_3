@@ -2,6 +2,7 @@ package edu.solvd.mentoring.road;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import edu.solvd.mentoring.road.surface.Surface;
@@ -13,7 +14,7 @@ import edu.solvd.mentoring.road.surface.Surface;
  */
 public class Stage {
   private String stageName;
-  private ArrayList<Vector> vectors = new ArrayList<>();
+  private List<Vector> vectors = new ArrayList<>();
   private Map<Double,Double> angles = new HashMap<>();
   private Surface surface;
   private double stageDistance;
