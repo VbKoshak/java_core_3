@@ -1,4 +1,4 @@
-package edu.solvd.mentoring.exceptions;
+package edu.solvd.mentoring.exceptions.inputErrors;
 
 public class EmptyArrayException extends IncorrectInputException {
   public EmptyArrayException(String msg){

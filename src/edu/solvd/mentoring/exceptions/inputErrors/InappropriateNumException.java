@@ -1,4 +1,4 @@
-package edu.solvd.mentoring.exceptions;
+package edu.solvd.mentoring.exceptions.inputErrors;
 
 public class InappropriateNumException extends IncorrectInputException{
   public InappropriateNumException(String msg){

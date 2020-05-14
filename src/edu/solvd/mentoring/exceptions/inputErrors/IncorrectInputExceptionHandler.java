@@ -1,4 +1,4 @@
-package edu.solvd.mentoring.exceptions;
+package edu.solvd.mentoring.exceptions.inputErrors;
 
 import edu.solvd.mentoring.enums.ErrReason;
 

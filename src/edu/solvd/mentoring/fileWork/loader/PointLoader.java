@@ -1,9 +1,9 @@
 package edu.solvd.mentoring.fileWork.loader;
 
 import edu.solvd.mentoring.enums.ErrReason;
-import edu.solvd.mentoring.exceptions.IncorrectInputException;
-import edu.solvd.mentoring.exceptions.IncorrectInputExceptionHandler;
-import edu.solvd.mentoring.exceptions.fileWork.UnableToReadException;
+import edu.solvd.mentoring.exceptions.inputErrors.IncorrectInputException;
+import edu.solvd.mentoring.exceptions.inputErrors.IncorrectInputExceptionHandler;
+import edu.solvd.mentoring.exceptions.fileWorkErrors.UnableToReadException;
 import edu.solvd.mentoring.fileWork.Reader.TextFileReader;
 import edu.solvd.mentoring.road.Point;
 

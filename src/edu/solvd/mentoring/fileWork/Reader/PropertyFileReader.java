@@ -1,6 +1,6 @@
 package edu.solvd.mentoring.fileWork.Reader;
 
-import edu.solvd.mentoring.exceptions.fileWork.UnableToReadException;
+import edu.solvd.mentoring.exceptions.fileWorkErrors.UnableToReadException;
 
 import java.io.*;
 import java.util.Properties;
@@ -20,7 +20,7 @@ public class PropertyFileReader extends BaseReader implements Reader {
   public String read() throws UnableToReadException {
     this.props = new Properties();
     try {
-      if (!this.absolutePath.contains(".properties")) {
+      if (!this.absolutePath.endsWith(".properties")) {
         throw new RuntimeException("Provide the file in proper format");
       }
       InputStream inputStream = new FileInputStream(new File(this.absolutePath).getAbsolutePath());
@@ -30,6 +30,10 @@ public class PropertyFileReader extends BaseReader implements Reader {
       throw new UnableToReadException("");
     }
     return "OK"; // :)
+  }
+
+  public Properties getProps(){
+    return this.props;
   }
 
   public String getPropertyValue(String key) {

@@ -1,4 +1,4 @@
-package edu.solvd.mentoring.exceptions;
+package edu.solvd.mentoring.exceptions.inputErrors;
 
 public class UnknownInputException extends IncorrectInputException {
   public UnknownInputException(String msg){
