@@ -1,4 +1,4 @@
-package edu.solvd.mentoring.fileWork;
+package edu.solvd.mentoring.fileWork.Reader;
 
 import java.io.File;
 

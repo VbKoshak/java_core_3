@@ -4,25 +4,25 @@ import edu.solvd.mentoring.enums.ErrReason;
 
 public class IncorrectInputExceptionHandler extends RuntimeException{
   private ErrReason reason;
-  public IncorrectInputExceptionHandler(ErrReason reason, String msg){
-    super(msg);
+  public IncorrectInputExceptionHandler(ErrReason reason, String errCause){
+    super(errCause);
     this.reason = reason;
   }
 
-  public String showMessage(){
-    String excError;
+  public IncorrectInputException getError(){
+    IncorrectInputException excError;
     switch(reason){
       case LogicError:
-        excError = (new LogicErrorException(this.getMessage())).getMessage();
+        excError = new LogicErrorException(this.getMessage());
         break;
       case EmptyArray:
-        excError = (new EmptyArrayException(this.getMessage())).getMessage();
+        excError = new EmptyArrayException(this.getMessage());
         break;
       case InappropriateNum:
-        excError = (new InappropriateNumException(this.getMessage())).getMessage();
+        excError = new InappropriateNumException(this.getMessage());
         break;
       default:
-        excError = ("Unknown error with: " + this.getMessage());
+        excError = new UnknownInputException(this.getMessage());
         break;
     }
     return excError;

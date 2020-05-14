@@ -5,6 +5,7 @@ import edu.solvd.mentoring.car.detail.CarBase;
 import edu.solvd.mentoring.car.detail.Engine;
 import edu.solvd.mentoring.car.detail.Wheel;
 import edu.solvd.mentoring.enums.ErrReason;
+import edu.solvd.mentoring.exceptions.IncorrectInputException;
 import edu.solvd.mentoring.exceptions.IncorrectInputExceptionHandler;
 import edu.solvd.mentoring.road.*;
 import edu.solvd.mentoring.road.Vector;
@@ -102,13 +103,14 @@ class Support {
     Set<Integer> surfaceKeys = surfaces.keySet();
     try {
       if (surfaceKeys.size() == 0) {
-        throw new IncorrectInputExceptionHandler(ErrReason.EmptyArray,"Surfaces");
+        throw new IncorrectInputExceptionHandler(ErrReason.EmptyArray,"Surfaces").getError();
       }
       if (maxClutch <= minClutch) {
-        throw new IncorrectInputExceptionHandler(ErrReason.LogicError,"Min and Max Clutch values");
+        throw new IncorrectInputExceptionHandler(ErrReason.LogicError,"Min and Max Clutch values").getError();
       }
-    } catch (IncorrectInputExceptionHandler exc){
-      exc.showMessage();
+    } catch (IncorrectInputException exc){
+      exc.getMessage();
+      System.exit(2);
     }
 
     for(Integer i: surfaceKeys){

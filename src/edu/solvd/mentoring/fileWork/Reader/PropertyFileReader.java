@@ -1,8 +1,6 @@
-package edu.solvd.mentoring.fileWork;
+package edu.solvd.mentoring.fileWork.Reader;
 
-import edu.solvd.mentoring.exceptions.UnableToReadException;
-import edu.solvd.mentoring.fileWork.Reader;
-import edu.solvd.mentoring.fileWork.BaseReader;
+import edu.solvd.mentoring.exceptions.fileWork.UnableToReadException;
 
 import java.io.*;
 import java.util.Properties;
