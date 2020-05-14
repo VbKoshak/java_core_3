@@ -60,22 +60,24 @@ class Support {
   private static short s(int i) {
     try{
       if (i > 32767 || i < -32768) {
-        throw new IncorrectInputExceptionHandler(ErrReason.InappropriateNum,"ToShort " + i + " ");
+        throw new IncorrectInputExceptionHandler(ErrReason.InappropriateNum,"ToShort " + i + " ").getError();
       }
       return (short)i;
-    } catch (IncorrectInputExceptionHandler err) {
-      System.out.println(err.showMessage());
+    } catch (IncorrectInputException err) {
+      System.out.println(err.getMessage());
+      System.exit(10);
       return 0;
     }
   }
   private static short s(double i) {
     try {
       if (i > 32767 || i < -32768) {
-        throw new IncorrectInputExceptionHandler(ErrReason.InappropriateNum,"ToShort " + i + " ");
+        throw new IncorrectInputExceptionHandler(ErrReason.InappropriateNum,"ToShort " + i + " ").getError();
       }
       return (short)i;
-    } catch (IncorrectInputExceptionHandler err) {
-      System.out.println(err.showMessage());
+    } catch (IncorrectInputException err) {
+      System.out.println(err.getMessage());
+      System.exit(10);
       return 0;
     }
   }
