@@ -4,6 +4,7 @@ import edu.solvd.mentoring.car.Car;
 import edu.solvd.mentoring.car.detail.CarBase;
 import edu.solvd.mentoring.car.detail.Engine;
 import edu.solvd.mentoring.car.detail.Wheel;
+import edu.solvd.mentoring.controlInstances.Garage;
 import edu.solvd.mentoring.enums.ErrReason;
 import edu.solvd.mentoring.exceptions.inputErrors.IncorrectInputException;
 import edu.solvd.mentoring.exceptions.inputErrors.IncorrectInputExceptionHandler;
@@ -32,7 +33,7 @@ import java.util.*;
  *    Car
  *    Route
  */
-class Support {
+public class Support {
   /**
    * map of pre-defined
    *    surfaces

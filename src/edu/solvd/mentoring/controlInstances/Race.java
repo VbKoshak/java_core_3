@@ -1,9 +1,7 @@
-package edu.solvd.mentoring;
+package edu.solvd.mentoring.controlInstances;
 
 import edu.solvd.mentoring.car.Car;
 import edu.solvd.mentoring.road.Route;
-
-import java.util.Arrays;
 
 /**
  * class to represent the actual race in the game
