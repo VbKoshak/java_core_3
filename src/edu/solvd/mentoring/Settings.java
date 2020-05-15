@@ -10,9 +10,10 @@ public class Settings {
    * DEFAULT_NAME - name used for generated carDetails
    * MAX(MIN)_AXISLENGTH_INCREASE - maximum (minimum) increase in axes between to ordered points of the road
    * DEFAULT_ROUTES_VECTOR_COUNT - default number of vectors in route
-   * MAX(MIN)_ENGINE_SPEED - maximum(minimum) speed engine can possess
+   * SPECIFICATION_BONUS - pointss added to non-Car CarLike specialization characteristicks
    * SPEED_DECREASE - value from [0-1] showing the lost in speed after sharp angle
    * DEFAULT_MONEY - amount of money player starts to play with
+   * MAX(MIN)_ENGINE_SPEED - maximum(minimum) speed engine can possess
    * same goes with:
    *        MAX(MIN)_ENGINE_BOOST
    *        MAX(MIN)_WHEEL_CLUTCH
@@ -20,6 +21,7 @@ public class Settings {
    *        MAX(MIN)_CARBASE_BOOST
    *        MAX(MIN)_CARBASE_CLUTCH
    */
+  public static final short SPECIFICATION_BONUS = 2;
   public static final String DEFAULT_NAME = "Some default name";
   public static final short MAX_AXISLENGTH_INCREASE = 5;
   public static final int DEFAULT_ROUTES_VECTOR_COUNT = 3;
@@ -28,7 +30,7 @@ public class Settings {
   public static final short MAX_ENGINE_BOOST = 7;
   public static final short MIN_ENGINE_BOOST = 0;
   public static final short MAX_WHEEL_CLUTCH = 7;
-  public static final short MIN_WHEEL_CLUTCH = 7;
+  public static final short MIN_WHEEL_CLUTCH = 0;
   public static final short MAX_CARBASE_SPEED = 3;
   public static final short MIN_CARBASE_SPEED = 1;
   public static final short MAX_CARBASE_BOOST = 3;
