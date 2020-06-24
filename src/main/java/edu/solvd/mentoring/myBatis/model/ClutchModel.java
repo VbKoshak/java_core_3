@@ -1,7 +1,6 @@
 package edu.solvd.mentoring.myBatis.model;
 
 public class ClutchModel {
-    private int id;
     private int clutch;
     private String sym;
     private String surface;
@@ -34,21 +33,21 @@ public class ClutchModel {
         this.surface = surface;
     }
 
-    public ClutchModel(int clutch, String sym, String surface, int id) {
+    public ClutchModel(int clutch, String sym, String surface) {
         this.clutch = clutch;
         this.sym = sym;
         this.surface = surface;
-        this.id = id;
+//        this.id = id;
     }
 
     @Override
     public String toString() {return sym + clutch;}
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+//    public int getId() {
+//        return id;
+//    }
+//
+//    public void setId(int id) {
+//        this.id = id;
+//    }
 }

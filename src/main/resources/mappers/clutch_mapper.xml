@@ -5,15 +5,15 @@
 <mapper namespace="clutch_mapper">
 
     <select id="getAll" resultMap="clutch_map">
-        select c.clutch_Id as id, c.value as clutch, s.char as sym, s.name as surface from clutch c join surface s on c.surface_id = s.surface_id;
+        select c.value as clutch, s.char as sym, s.name as surface from clutch c join surface s on c.surface_id = s.surface_id;
     </select>
 
     <select id="getById" resultMap="clutch_map">
-        select c.clutch_Id as id, c.value as clutch, s.char as sym, s.name as surface from clutch c join surface s on c.surface_id = s.surface_id where c.clutch_Id = #{id};
+        select c.value as clutch, s.char as sym, s.name as surface from clutch c join surface s on c.surface_id = s.surface_id where c.clutch_Id = #{id};
     </select>
 
     <resultMap id="clutch_map" type="edu.solvd.mentoring.myBatis.model.ClutchModel" autoMapping="false">
-        <id property="id" column="id"/>
+        <id property="surface" column="surface"/>
         <result property="sym" column="sym"/>
         <result property="surface" column="surface"/>
         <result property="clutch" column="clutch"/>
