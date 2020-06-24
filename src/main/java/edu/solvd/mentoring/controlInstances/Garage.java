@@ -1,6 +1,6 @@
 package edu.solvd.mentoring.controlInstances;
 
-import edu.solvd.mentoring.car.detail.CarDetail;
+import edu.solvd.mentoring.gameInstances.car.detail.CarDetail;
 
 import java.util.HashMap;
 import java.util.Map;

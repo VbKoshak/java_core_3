@@ -1,8 +1,8 @@
 package edu.solvd.mentoring.controlInstances;
 
-import edu.solvd.mentoring.Support;
-import edu.solvd.mentoring.car.Car;
-import edu.solvd.mentoring.road.Route;
+import edu.solvd.mentoring.resources.Support;
+import edu.solvd.mentoring.gameInstances.car.Car;
+import edu.solvd.mentoring.gameInstances.road.Route;
 
 /**
  * main game object

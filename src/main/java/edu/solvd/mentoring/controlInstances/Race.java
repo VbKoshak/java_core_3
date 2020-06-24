@@ -1,7 +1,7 @@
 package edu.solvd.mentoring.controlInstances;
 
-import edu.solvd.mentoring.car.Car;
-import edu.solvd.mentoring.road.Route;
+import edu.solvd.mentoring.gameInstances.car.Car;
+import edu.solvd.mentoring.gameInstances.road.Route;
 
 /**
  * class to represent the actual race in the game

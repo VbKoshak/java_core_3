@@ -1,6 +1,6 @@
 package edu.solvd.mentoring.exceptions.inputErrors;
 
-import edu.solvd.mentoring.enums.ErrReason;
+import edu.solvd.mentoring.resources.enums.ErrReason;
 
 public class IncorrectInputExceptionHandler extends RuntimeException{
   private ErrReason reason;

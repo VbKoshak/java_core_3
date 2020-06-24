@@ -1,7 +1,7 @@
 package edu.solvd.mentoring.controlInstances;
 
-import edu.solvd.mentoring.Settings;
-import edu.solvd.mentoring.car.Car;
+import edu.solvd.mentoring.resources.Settings;
+import edu.solvd.mentoring.gameInstances.car.Car;
 
 /**
  * defines main chracter of the game (player)
