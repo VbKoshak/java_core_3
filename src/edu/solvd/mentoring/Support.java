@@ -4,8 +4,10 @@ import edu.solvd.mentoring.car.Car;
 import edu.solvd.mentoring.car.detail.CarBase;
 import edu.solvd.mentoring.car.detail.Engine;
 import edu.solvd.mentoring.car.detail.Wheel;
+import edu.solvd.mentoring.controlInstances.Garage;
 import edu.solvd.mentoring.enums.ErrReason;
-import edu.solvd.mentoring.exceptions.IncorrectInputExceptionHandler;
+import edu.solvd.mentoring.exceptions.inputErrors.IncorrectInputException;
+import edu.solvd.mentoring.exceptions.inputErrors.IncorrectInputExceptionHandler;
 import edu.solvd.mentoring.road.*;
 import edu.solvd.mentoring.road.Vector;
 import edu.solvd.mentoring.road.surface.Surface;
@@ -31,7 +33,7 @@ import java.util.*;
  *    Car
  *    Route
  */
-class Support {
+public class Support {
   /**
    * map of pre-defined
    *    surfaces
@@ -59,22 +61,24 @@ class Support {
   private static short s(int i) {
     try{
       if (i > 32767 || i < -32768) {
-        throw new IncorrectInputExceptionHandler(ErrReason.InappropriateNum,"ToShort " + i + " ");
+        throw new IncorrectInputExceptionHandler(ErrReason.InappropriateNum,"ToShort " + i + " ").getError();
       }
       return (short)i;
-    } catch (IncorrectInputExceptionHandler err) {
-      System.out.println(err.showMessage());
+    } catch (IncorrectInputException err) {
+      System.out.println(err.getMessage());
+      System.exit(10);
       return 0;
     }
   }
   private static short s(double i) {
     try {
       if (i > 32767 || i < -32768) {
-        throw new IncorrectInputExceptionHandler(ErrReason.InappropriateNum,"ToShort " + i + " ");
+        throw new IncorrectInputExceptionHandler(ErrReason.InappropriateNum,"ToShort " + i + " ").getError();
       }
       return (short)i;
-    } catch (IncorrectInputExceptionHandler err) {
-      System.out.println(err.showMessage());
+    } catch (IncorrectInputException err) {
+      System.out.println(err.getMessage());
+      System.exit(10);
       return 0;
     }
   }
@@ -102,13 +106,14 @@ class Support {
     Set<Integer> surfaceKeys = surfaces.keySet();
     try {
       if (surfaceKeys.size() == 0) {
-        throw new IncorrectInputExceptionHandler(ErrReason.EmptyArray,"Surfaces");
+        throw new IncorrectInputExceptionHandler(ErrReason.EmptyArray,"Surfaces").getError();
       }
       if (maxClutch <= minClutch) {
-        throw new IncorrectInputExceptionHandler(ErrReason.LogicError,"Min and Max Clutch values");
+        throw new IncorrectInputExceptionHandler(ErrReason.LogicError,"Min and Max Clutch values").getError();
       }
-    } catch (IncorrectInputExceptionHandler exc){
-      exc.showMessage();
+    } catch (IncorrectInputException exc){
+      exc.getMessage();
+      System.exit(2);
     }
 
     for(Integer i: surfaceKeys){

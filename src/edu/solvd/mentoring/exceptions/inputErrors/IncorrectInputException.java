@@ -1,4 +1,4 @@
-package edu.solvd.mentoring.exceptions;
+package edu.solvd.mentoring.exceptions.inputErrors;
 
 public abstract class IncorrectInputException extends Throwable {
   protected String msg;

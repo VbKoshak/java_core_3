@@ -1,4 +1,4 @@
-package edu.solvd.mentoring;
+package edu.solvd.mentoring.controlInstances;
 
 import edu.solvd.mentoring.car.detail.CarDetail;
 

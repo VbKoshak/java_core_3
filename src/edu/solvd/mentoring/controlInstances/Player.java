@@ -1,5 +1,6 @@
-package edu.solvd.mentoring;
+package edu.solvd.mentoring.controlInstances;
 
+import edu.solvd.mentoring.Settings;
 import edu.solvd.mentoring.car.Car;
 
 /**

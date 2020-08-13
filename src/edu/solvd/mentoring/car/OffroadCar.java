@@ -1,33 +1,32 @@
 package edu.solvd.mentoring.car;
 
+import edu.solvd.mentoring.Settings;
 import edu.solvd.mentoring.car.detail.CarBase;
 import edu.solvd.mentoring.car.detail.Engine;
 import edu.solvd.mentoring.car.detail.Wheel;
 
 import java.util.HashMap;
-import java.util.Map;
 
 /**
- * Car class
+ * RaceCar class
  * contains details it is build from
  * and total characteristicks calculated based on details
- * no additional bonuses in characteristicks for this cars
+ * additional points to maxSpeed and boost
  */
-public class Car extends CarLike{
+public class OffroadCar extends Car {
 
-  public Car(Engine engine, Wheel wheel, CarBase base){
+
+  public OffroadCar(Engine engine, Wheel wheel, CarBase base) {
     super(engine,wheel,base);
+    calculateCharacteristicks();
   }
 
-  /**
-   * method that is used to calculate final characteristicks based on details car possess
-   */
   public void calculateCharacteristicks(){
     this.maxSpeed = (short)(carBase.getBasicMaxSpeed() + engine.getMaxSpeed());
     this.boost = (short)(carBase.getBasicBoost() + engine.getBoost());
     this.clutch = new HashMap<>(this.carBase.getBasicClutch());
     this.wheel.getClutch().forEach(
-      (key, value) -> this.clutch.merge( key, value, (v1, v2) -> (short)(v1 + v2))
+      (key, value) -> this.clutch.merge( key, value, (v1, v2) -> (short)(v1 + v2  + Settings.SPECIFICATION_BONUS))
     );
   }
 }
