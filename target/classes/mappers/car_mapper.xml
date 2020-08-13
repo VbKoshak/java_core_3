@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="car_mapper">
+    <select id="getById" resultMap="car_map">
+        select sum(q.clutch) as clutch, s.name as surface, s.char as sym, q.id as id, z.speed as speed, z.boost as boost  from
+        (
+        select sum(cl.value) as clutch, cl.surface_Id as surface, c.car_id as id from clutch cl, car c, carBase cb where c.car_id = #{id} and c.carBase_id = cb.carBase_id and cb.clutch_id = cl.clutch_Id group by cl.surface_id
+        union all
+        select sum(cl.value) as clutch, cl.surface_Id as surface, c.car_id as id from clutch cl, car c, wheel w where c.wheel_id = w.wheel_id and w.clutch_id = cl.clutch_Id and c.car_id = #{id} group by cl.surface_Id
+        )
+        as q, surface s
+        join
+        (
+        select c.car_id as id, cb.basicMaxspeed + e.maxSpeed as speed, cb.basicBoost + e.boost as boost from car c, carBase cb, engine e where c.engine_id = e.engine_id and c.carBase_id = cb.carBase_id
+        )
+        as z where z.id = q.id and q.surface = s.surface_id group by q.surface, q.id;
+
+    </select>
+
+    <resultMap id="car_map" type="edu.solvd.mentoring.myBatis.model.CarModel" autoMapping="false">
+        <id property="id" column="id"/>
+        <result property="id" column="id"/>
+        <result property="speed" column="speed"/>
+        <result property="boost" column="boost"/>
+        <collection property="clutch" resultMap="clutch_mapper.clutch_map"/>
+    </resultMap>
+</mapper>
