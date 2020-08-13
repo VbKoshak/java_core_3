@@ -4,6 +4,8 @@ import edu.solvd.mentoring.car.Car;
 import edu.solvd.mentoring.car.detail.CarBase;
 import edu.solvd.mentoring.car.detail.Engine;
 import edu.solvd.mentoring.car.detail.Wheel;
+import edu.solvd.mentoring.enums.ErrReason;
+import edu.solvd.mentoring.exceptions.IncorrectInputExceptionHandler;
 import edu.solvd.mentoring.road.*;
 import edu.solvd.mentoring.road.Vector;
 import edu.solvd.mentoring.road.surface.Surface;
@@ -54,10 +56,28 @@ class Support {
    * @param i value to convert
    * @return short variant of i
    */
-  private static short s(int i){
-    return (short)i;
+  private static short s(int i) {
+    try{
+      if (i > 32767 || i < -32768) {
+        throw new IncorrectInputExceptionHandler(ErrReason.InappropriateNum,"ToShort " + i + " ");
+      }
+      return (short)i;
+    } catch (IncorrectInputExceptionHandler err) {
+      System.out.println(err.showMessage());
+      return 0;
+    }
   }
-  private static short s(double i){ return (short)i; }
+  private static short s(double i) {
+    try {
+      if (i > 32767 || i < -32768) {
+        throw new IncorrectInputExceptionHandler(ErrReason.InappropriateNum,"ToShort " + i + " ");
+      }
+      return (short)i;
+    } catch (IncorrectInputExceptionHandler err) {
+      System.out.println(err.showMessage());
+      return 0;
+    }
+  }
 
 
   /**
@@ -80,6 +100,16 @@ class Support {
   private static Map<Integer,Short> getGeneratedClutch(short maxClutch, short minClutch, Map<Integer,Surface> surfaces){
     Map<Integer,Short> clutch = new HashMap<>();
     Set<Integer> surfaceKeys = surfaces.keySet();
+    try {
+      if (surfaceKeys.size() == 0) {
+        throw new IncorrectInputExceptionHandler(ErrReason.EmptyArray,"Surfaces");
+      }
+      if (maxClutch <= minClutch) {
+        throw new IncorrectInputExceptionHandler(ErrReason.LogicError,"Min and Max Clutch values");
+      }
+    } catch (IncorrectInputExceptionHandler exc){
+      exc.showMessage();
+    }
 
     for(Integer i: surfaceKeys){
       short val = getShort(maxClutch,minClutch);
